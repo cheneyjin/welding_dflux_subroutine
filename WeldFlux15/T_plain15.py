@@ -247,7 +247,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
         try:
             p3=point3.pointOn
         except:
-            print "Please make sure only node or datum point can be selected!
+            print "Please make sure only node or datum point can be selected!"
 
     try:
         p4=point4.coordinates
