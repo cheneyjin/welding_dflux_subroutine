@@ -213,7 +213,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     ar = (mdb.Arrow(name='VerticalArrow', startPoint=(18., 43.), startAnchor=(p3[0], p3[1], p3[2]), 
 		    endAnchor=(p3[0], p3[1], p3[2]), color='#FFFFFF', lineThickness=MEDIUM))
     session.viewports['Viewport: 1'].plotAnnotation(annotation=ar)
-    t = (mdb.Text(name='VerticalPoint', text='VerticalPoint', offset=(18., 43.), anchor=(p3[0], p3[1], p3[2]), 
+    t = (mdb.Text(name='ToePoint', text='ToePoint', offset=(18., 43.), anchor=(p3[0], p3[1], p3[2]), 
 		    referencePoint=BOTTOM_CENTER, font='-*-arial-bold-r-normal-*-*-120-*-*-p-*-*-*', 
 		    backgroundStyle=OTHER, backgroundColor='#FF7F00', box=ON))
     session.viewports['Viewport: 1'].plotAnnotation(annotation=t)
@@ -231,7 +231,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
         try:
             p1=point1.pointOn
         except:
-            print "Start Point is invalid!"
+            print "Please make sure only node or datum point can be selected!"
 
     try:
         p2=point2.coordinates
@@ -239,7 +239,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
         try:
             p2=point2.pointOn
         except:
-            print "Along Point is invalid!"
+            print "Please make sure only node or datum point can be selected!"
 
     try:
         p3=point3.coordinates
@@ -247,7 +247,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
         try:
             p3=point3.pointOn
         except:
-            print "Along Point2 is invalid!"
+            print "Please make sure only node or datum point can be selected!
 
     try:
         p4=point4.coordinates
