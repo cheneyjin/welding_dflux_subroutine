@@ -33,9 +33,9 @@ from numpy.linalg import det
 #
 #	This plug-in code can only be used in Abaqus.
 #
-#       Only Planar Gauss, Double-ellipsoid and Cone body heat source can be applied 
+#   Only Planar Gauss, Double-ellipsoid and Cone body heat source can be applied 
 #       in this version.
-#
+#   Using mm-tonne-s units by default.
 #===========================================================================
 
 def kernel(current, vol,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,point4):
@@ -121,7 +121,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
         f.writelines("          a2= "+str(a2)+'\n')
         f.writelines("          ratio= "+str(ratio)+'\n')
         fr=2./(1+ratio)
-        ff=ratio*fr
+        ff=2.-fr
         f.writelines("          ff= "+str(ff)+'\n')
         f.writelines("          fr= "+str(fr)+'\n')
         
@@ -153,8 +153,8 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     
     # Write DFLUX for Double Ellipsoid
     elif mtype=='Double Ellipsoid':
-        f.writelines("          qm1=1.86772*ff*power/a/b/c\n")
-        f.writelines("          qm2=1.86772*ff*power/ratio/a2/b/c\n")
+        f.writelines("          qm1=1.8663*ff*power/a/b/c\n")
+        f.writelines("          qm2=1.8663*fr*power/a2/b/c\n")
         # Calculate distance from W_Plain
         f.writelines("       zz = (" +str(Aw)+ "*coords(1)+\n")
         f.writelines("     &  "+str(Bw)+"*coords(2)+" + str(Cw)+ "*coords(3)+\n")
@@ -175,7 +175,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
         f.writelines("          FLUX(1)=0.0\n")
         f.writelines("       else\n")
         f.writelines("          r0 = a-(a-b)*zz**0.5/c\n")
-        f.writelines("          FLUX(1)=qm*EXP(-3*(xx+yy)/r0/r0)/c/(a**2+a*b+b**2)\n")
+        f.writelines("          FLUX(1)=qm*EXP(-3*(xx+yy)/r0/r0)/c/(a*a+a*b+b*b)\n")
         f.writelines("       end if\n")
     
 
@@ -302,7 +302,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     a1 = o1p4 / np.linalg.norm(o1p4) 
     b1 = b1 / np.linalg.norm(b1) 
     '''
-        x3 = o1[0] + r1 * a1[0] * np.cos(theta) + r1 * b1[0] * np.sin(theta)  # x,y,z on toe circle
+        x3 = o1[0] + r1 * a1[0] * np.cos(theta) + r1 * b1[0] * np.sin(theta)  
         y3 = o1[1] + r1 * a1[1] * np.cos(theta) + r1 * b1[1] * np.sin(theta)  
         z3 = o1[2] + r1 * a1[2] * np.cos(theta) + r1 * b1[2] * np.sin(theta) 
     '''
@@ -338,7 +338,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
             f.writelines("      a2= "+str(a2)+'\n')
             f.writelines("      ratio= "+str(ratio)+'\n')
             fr=round(2./(1+float(ratio)),8)
-            ff=round(float(ratio)*fr,8)
+            ff=2.-fr
             f.writelines("      ff= "+str(ff)+'\n')
             f.writelines("      fr= "+str(fr)+'\n')
             
@@ -356,7 +356,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     else:
             f.writelines("      w = vel/"+str(r)+'\n')
             f.writelines("      theta = w*time(1)"+'\n')
-            f.writelines("      theta2 = w*time(1)+pi/3"+'\n')
+            f.writelines("      theta2 = w*time(1)+3.1416/3"+'\n')
         
         
     f.writelines("      yita= "+str(eff)+'\n')
@@ -393,8 +393,8 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
         
     # Write DFLUX for Double Ellipsoid
     if mtype=='Double Ellipsoid':
-            f.writelines("          qm1=1.86772*ff*power/a/b/c\n")
-            f.writelines("          qm2=1.86772*ff*power/ratio/a2/b/c\n")
+            f.writelines("          qm1=1.8663*ff*power/a/b/c\n")
+            f.writelines("          qm2=1.8663*fr*power/a2/b/c\n")
             # Calculate distance from W_Plain
             f.writelines("       zz = (Aw*coords(1)+\n")
             f.writelines("     &  Bw*coords(2)+Cw*coords(3)+\n")
@@ -416,7 +416,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
             f.writelines("          FLUX(1)=0.0\n")
             f.writelines("       else\n")
             f.writelines("          r0 = a-(a-b)*zz**0.5/c\n")
-            f.writelines("          FLUX(1)=qm*EXP(-3*(xx+yy)/r0/r0)/c/(a**2+a*b+b**2)\n")
+            f.writelines("          FLUX(1)=qm*EXP(-3*(xx+yy)/r0/r0)/c/(a*a+a*b+b*b)\n")
             f.writelines("       end if\n")
     f.writelines("      return\n")
     f.writelines("      end\n\n")
