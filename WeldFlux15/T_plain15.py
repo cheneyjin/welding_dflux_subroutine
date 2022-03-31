@@ -55,7 +55,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
         try:
             p1=point1.pointOn
         except:
-            print "Start Point is invalid!"
+            print "Please make sure only node or datum point can be selected!"
 
     try:
         p2=point2.coordinates
@@ -63,7 +63,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
         try:
             p2=point2.pointOn
         except:
-            print "Along Point is invalid!"
+            print "Please make sure only node or datum point can be selected!"
 
     try:
         p3=point3.coordinates
@@ -71,7 +71,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
         try:
             p3=point3.pointOn
         except:
-            print "Toe Point is invalid!"
+            print "Please make sure only node or datum point can be selected!"
             
     print "The weld startpoint is: ", p1
     print "The weld direction is towards: ",p2
