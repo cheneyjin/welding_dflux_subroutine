@@ -13,6 +13,10 @@ To run it, launch abaqus CAE, click plug-ins WeldFlux15 in manu bar.
 -  Cone body 
 ### Both the straight and circular welding path are supported.
 
+### The subroutine file uses mm-tonne-s units by default.
+
+
+
 
 # WeldFlux
 这是一个运行于abaqus中的脚本，用于自动生成焊接热源子程序DFLUX。
@@ -26,4 +30,6 @@ windows系统下一般位于%HOMEPATH%/abaqus_plugins
 -  平面高斯
 -  双椭球
 -  圆锥体
+
 ### 支持直线型或圆弧型焊接路径。
+### 子程序文件默认使用毫米-吨-秒单位制。
