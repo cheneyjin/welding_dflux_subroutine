@@ -2,7 +2,7 @@
 This is a GUI plug-in script for abaqus to generate welding heat source subroutine 'dflux.for'.
 
 ## install
-Put the folder 'WeldFlux15' to abaqus_plugins folder. 
+Put the folder 'WeldFlux15' to abaqus_plugins directory.  
 By default, it is located in %HOMEPATH%/abaqus_plugins in windows system.
 ## run
 To run it, launch abaqus CAE, click plug-ins WeldFlux15 in manu bar.
@@ -12,7 +12,6 @@ To run it, launch abaqus CAE, click plug-ins WeldFlux15 in manu bar.
 -  Double-ellipsoid
 -  Cone body 
 ### Both the straight and circular welding path are supported.
-
 ### The subroutine file uses mm-tonne-s units by default.
 
 
