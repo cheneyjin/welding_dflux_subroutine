@@ -1,5 +1,5 @@
 # WeldFlux
-This is a GUI plug-in script used in abaqus to generate welding heat source subroutine 'dflux'.
+This is a GUI plug-in script for abaqus to generate welding heat source subroutine 'dflux.for'.
 
 ## install
 Put the folder 'WeldFlux15' to abaqus_plugins folder. 
