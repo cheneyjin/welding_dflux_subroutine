@@ -75,7 +75,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
             
     print "The weld startpoint is: ", p1
     print "The weld direction is towards: ",p2
-    print "The vertical point(p3) is: ",p3
+    print "The weld toe point(p3) is: ",p3
 
     # Calculate W_Plain
     Aw = (p2[1]-p1[1])*(p3[2]-p1[2])-(p2[2]-p1[2])*(p3[1]-p1[1])
@@ -257,10 +257,10 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
         except:
             print "Toe Point is invalid!"
             
-    print "The weld Startpoint is: ", p1
+    print "The weld Start point is: ", p1
     print "The First point on weld arc is: ",p2
     print "The Second point on weld arc is ",p3
-    print "The weld Toe point is: ",p4
+    print "The weld toe point is: ",p4
 
     o,r,normal=points2circle(p1,p2,p3)
     r = round(r,4)
