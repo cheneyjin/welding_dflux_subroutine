@@ -129,7 +129,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
         f.writelines("          c = "+str(c)+'\n')
         f.writelines("          a2= "+str(a2)+'\n')
         f.writelines("          ratio= "+str(ratio)+'\n')
-        fr=2./(1+ratio)
+        fr=round(2./(1+float(ratio)),8)
         ff=2.-fr
         f.writelines("          ff= "+str(ff)+'\n')
         f.writelines("          fr= "+str(fr)+'\n')
