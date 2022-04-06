@@ -1,3 +1,5 @@
+![arc](https://github.com/cheneyjin/welding_dflux_subroutine/blob/main/WeldFlux15/arc.png)
+![result](https://github.com/cheneyjin/welding_dflux_subroutine/blob/main/result.png)
 # WeldFlux
 This is a GUI plug-in script for abaqus to generate welding heat source subroutine DFLUX.
 
