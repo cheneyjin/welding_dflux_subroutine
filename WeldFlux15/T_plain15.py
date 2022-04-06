@@ -75,7 +75,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
             
     print "The weld startpoint is: ", p1
     print "The weld direction is towards: ",p2
-    print "The vertical point(p3) is: ",p3
+    print "The toe point(p3) is: ",p3
 
     # Calculate W_Plain
     Aw = (p2[1]-p1[1])*(p3[2]-p1[2])-(p2[2]-p1[2])*(p3[1]-p1[1])
