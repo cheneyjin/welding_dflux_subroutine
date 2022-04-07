@@ -49,29 +49,41 @@ def kernel(current, vol,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,
 
 def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     # Obtain the coordinates of the three point
-    try:
-        p1=point1.coordinates
-    except:
+    t1 = type(point1)
+    t2 = type(point2)
+    t3 = type(point3)
+    if t1 == tuple:
+        p1=point1
+    else:
         try:
-            p1=point1.pointOn
+            p1=point1.coordinates
         except:
-            print "Please make sure only node or datum point can be selected!"
+            try:
+                p1=point1.pointOn
+            except:
+                print "Please make sure only node or datum point can be selected!"
 
-    try:
-        p2=point2.coordinates
-    except:
+    if t2 == tuple:
+        p2=point2
+    else:
         try:
-            p2=point2.pointOn
+            p2=point2.coordinates
         except:
-            print "Please make sure only node or datum point can be selected!"
+            try:
+                p2=point2.pointOn
+            except:
+                print "Please make sure only node or datum point can be selected!"
 
-    try:
-        p3=point3.coordinates
-    except:
+    if t3 == tuple:
+        p3=point3
+    else:
         try:
-            p3=point3.pointOn
+            p3=point3.coordinates
         except:
-            print "Please make sure only node or datum point can be selected!"
+            try:
+                p3=point3.pointOn
+            except:
+                print "Please make sure only node or datum point can be selected!"
             
     print "The weld startpoint is: ", p1
     print "The weld direction is towards: ",p2
@@ -234,37 +246,53 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
 
 def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4):
     # Obtain the coordinates of the four points
-    try:
-        p1=point1.coordinates
-    except:
+    t1 = type(point1)
+    t2 = type(point2)
+    t3 = type(point3)
+    t4 = type(point4)
+    if t1 == tuple:
+        p1=point1
+    else:
         try:
-            p1=point1.pointOn
+            p1=point1.coordinates
         except:
-            print "Please make sure only node or datum point can be selected!"
+            try:
+                p1=point1.pointOn
+            except:
+                print "Please make sure only node or datum point can be selected!"
 
-    try:
-        p2=point2.coordinates
-    except:
+    if t2 == tuple:
+        p2=point2
+    else:
         try:
-            p2=point2.pointOn
+            p2=point2.coordinates
         except:
-            print "Please make sure only node or datum point can be selected!"
+            try:
+                p2=point2.pointOn
+            except:
+                print "Please make sure only node or datum point can be selected!"
 
-    try:
-        p3=point3.coordinates
-    except:
+    if t3 == tuple:
+        p3=point3
+    else:
         try:
-            p3=point3.pointOn
+            p3=point3.coordinates
         except:
-            print "Please make sure only node or datum point can be selected!"
+            try:
+                p3=point3.pointOn
+            except:
+                print "Please make sure only node or datum point can be selected!"
 
-    try:
-        p4=point4.coordinates
-    except:
+    if t4 == tuple:
+        p4=point4
+    else:
         try:
-            p4=point4.pointOn
+            p4=point4.coordinates
         except:
-            print "Please make sure only node or datum point can be selected!"
+            try:
+                p4=point4.pointOn
+            except:
+                print "Please make sure only node or datum point can be selected!"
             
     print "The weld Startpoint is: ", p1
     print "The First point on weld arc is: ",p2
