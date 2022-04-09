@@ -3,6 +3,8 @@
 # WeldFlux
 This is a GUI plug-in for abaqus to generate welding heat source subroutine DFLUX.
 
+Watch a video tutorial at https://youtu.be/VQxh8XgLB2o
+
 ## install
 Put the folder 'WeldFlux15' to abaqus_plugins directory.  
 By default, it is located in %HOMEPATH%/abaqus_plugins in windows system.
@@ -21,6 +23,9 @@ To run it, launch abaqus CAE, click plug-ins WeldFlux15 in manu bar.
 
 # WeldFlux
 这是一个运行于abaqus中的GUI插件程序，用于自动生成焊接热源子程序DFLUX。
+
+视频教程 https://www.bilibili.com/video/BV1bZ4y1U7Ho/
+
 ## 安装
 将'WeldFlux15'文件夹放于 abaqus_plugins 目录。
 windows系统下一般位于%HOMEPATH%/abaqus_plugins
