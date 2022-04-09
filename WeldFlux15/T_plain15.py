@@ -61,7 +61,9 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
             try:
                 p1=point1.pointOn
             except:
-                print "Please make sure only node or datum point can be selected!"
+                print "Type of StartPoint is:", t1
+                getWarningReply(' The StartPoint is invalid!\nTry a Node or DatumPoint.', (YES,CANCEL))
+                return
 
     if t2 == tuple:
         p2=point2
@@ -72,7 +74,9 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
             try:
                 p2=point2.pointOn
             except:
-                print "Please make sure only node or datum point can be selected!"
+                print "Type of AlongPoint is:", t2
+                getWarningReply(' The AlongPoint is invalid!\nTry a Node or DatumPoint.', (YES,CANCEL))
+                return
 
     if t3 == tuple:
         p3=point3
@@ -83,7 +87,9 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
             try:
                 p3=point3.pointOn
             except:
-                print "Please make sure only node or datum point can be selected!"
+                print "Type of ToePoint is:", t3
+                getWarningReply(' The ToePoint is invalid!\nTry a Node or DatumPoint.', (YES,CANCEL))
+                return
             
     print "The weld startpoint is: ", p1
     print "The weld direction is towards: ",p2
@@ -115,7 +121,6 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     dt = datetime.now()
     ontime = dt.strftime('%Y-%m-%d %H:%M:%S')
     if os.path.exists('./dflux.for')==True:
-            from abaqus import getWarningReply, YES, NO
             reply=getWarningReply('The subroutine file exists!\nOverwrite?', (YES, NO))
             if reply==YES:
                 f=open('./dflux.for', 'w')
@@ -206,6 +211,11 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     f.close()
     print "The welding subroutine has been saved in '"+pwd+"\dflux.for' successfully!"
 
+    # Highlight points 
+    highlight(point1)
+    highlight(point2)
+    highlight(point3)
+
     # Plot annotations in viewpoint
     mo=mdb.models
     ass = mdb.models[mo.keys()[0]].rootAssembly
@@ -259,7 +269,9 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
             try:
                 p1=point1.pointOn
             except:
-                print "Please make sure only node or datum point can be selected!"
+                print "Type of StartPoint is:", t1
+                getWarningReply(' The StartPoint is invalid!\nTry a Node or DatumPoint.', (YES,CANCEL))
+                return
 
     if t2 == tuple:
         p2=point2
@@ -270,7 +282,9 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
             try:
                 p2=point2.pointOn
             except:
-                print "Please make sure only node or datum point can be selected!"
+                print "Type of AlongPoint1 is:", t2
+                getWarningReply(' The AlongPoint1 is invalid!\nTry a Node or DatumPoint.', (YES,CANCEL))
+                return
 
     if t3 == tuple:
         p3=point3
@@ -281,7 +295,9 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
             try:
                 p3=point3.pointOn
             except:
-                print "Please make sure only node or datum point can be selected!"
+                print "Type of AlongPoint2 is:", t3
+                getWarningReply(' The AlongPoint2 is invalid!\nTry a Node or DatumPoint.', (YES,CANCEL))
+                return
 
     if t4 == tuple:
         p4=point4
@@ -292,7 +308,9 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
             try:
                 p4=point4.pointOn
             except:
-                print "Please make sure only node or datum point can be selected!"
+                print "Type of ToePoint is:", t4
+                getWarningReply(' The ToePoint is invalid!\nTry a Node or DatumPoint.', (YES,CANCEL))
+                return
             
     print "The weld Startpoint is: ", p1
     print "The First point on weld arc is: ",p2
@@ -356,7 +374,6 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     dt = datetime.now()
     ontime = dt.strftime('%Y-%m-%d %H:%M:%S')
     if os.path.exists('./dflux.for')==True:
-            from abaqus import getWarningReply, YES, NO
             reply=getWarningReply('The subroutine file exists!\nOverwrite?', (YES, NO))
             if reply==YES:
                 f=open('./dflux.for', 'w')
