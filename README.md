@@ -1,7 +1,7 @@
 ![arc](https://github.com/cheneyjin/welding_dflux_subroutine/blob/main/WeldFlux15/arc.png)
 ![result](https://github.com/cheneyjin/welding_dflux_subroutine/blob/main/result.png)
 # WeldFlux
-This is a GUI plug-in script for abaqus to generate welding heat source subroutine DFLUX.
+This is a GUI plug-in for abaqus to generate welding heat source subroutine DFLUX.
 
 ## install
 Put the folder 'WeldFlux15' to abaqus_plugins directory.  
@@ -20,7 +20,7 @@ To run it, launch abaqus CAE, click plug-ins WeldFlux15 in manu bar.
 
 
 # WeldFlux
-这是一个运行于abaqus中的GUI脚本，用于自动生成焊接热源子程序DFLUX。
+这是一个运行于abaqus中的GUI插件程序，用于自动生成焊接热源子程序DFLUX。
 ## 安装
 将'WeldFlux15'文件夹放于 abaqus_plugins 目录。
 windows系统下一般位于%HOMEPATH%/abaqus_plugins
