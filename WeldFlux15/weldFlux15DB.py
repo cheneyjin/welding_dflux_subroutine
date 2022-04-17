@@ -168,7 +168,7 @@ class WeldFlux15DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         label = FXLabel(p=pickHf, text='Start Point:    ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux15DBPickHandler(form, form.point1Kw1, form.point1Kw2,'Pick the start point', NODES|POINTS, ONE,3, label)
+        pickHandler = WeldFlux15DBPickHandler(form, form.point1Kw1, form.point1Kw2,'Pick the start point', NODES|DATUM_POINTS, ONE,3, label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -179,7 +179,7 @@ class WeldFlux15DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         label = FXLabel(p=pickHf, text='Along Point:  ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux15DBPickHandler(form, form.point2Kw1,form.point2Kw2, 'Pick a point on weld line', NODES|POINTS, ONE, 3,label)
+        pickHandler = WeldFlux15DBPickHandler(form, form.point2Kw1,form.point2Kw2, 'Pick a point on weld line', NODES|DATUM_POINTS, ONE, 3,label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -190,7 +190,7 @@ class WeldFlux15DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.p2Label = FXLabel(p=pickHf, text='Along Point2:' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux15DBPickHandler(form, form.point3Kw1,form.point3Kw2, 'Pick anothe point on weld line', NODES|POINTS, ONE,4, self.p2Label)
+        pickHandler = WeldFlux15DBPickHandler(form, form.point3Kw1,form.point3Kw2, 'Pick anothe point on weld line', NODES|DATUM_POINTS, ONE,4, self.p2Label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.AP2=FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -201,7 +201,7 @@ class WeldFlux15DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         label = FXLabel(p=pickHf, text='Toe Point:     ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux15DBPickHandler(form, form.point4Kw1,form.point4Kw2, 'Pick a point on weld toe', NODES|POINTS, ONE, 2,label)
+        pickHandler = WeldFlux15DBPickHandler(form, form.point4Kw1,form.point4Kw2, 'Pick a point on weld toe', NODES|DATUM_POINTS, ONE, 2,label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
