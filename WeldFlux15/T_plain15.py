@@ -206,7 +206,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     
 
     f.writelines("      return\n")
-    f.writelines("      end")
+    f.writelines("      end\n")
     
     f.close()
     print "The welding subroutine has been saved in '"+pwd+"\dflux.for' successfully!"
@@ -510,7 +510,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines('      dnn= An*An+Bn*Bn+Cn*Cn\n')
     f.writelines('      disn = sqrt(dnn)\n\n')
     f.writelines('      RETURN\n')
-    f.writelines('      END')
+    f.writelines('      END\n')
 
         
     f.close()
