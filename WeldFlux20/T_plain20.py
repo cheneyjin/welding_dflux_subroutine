@@ -78,17 +78,19 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
     if period_left < 0.1:
         big_left = period_left
     ## Add AM Steps
+    vps = session.viewports.values()[0]
+    Model_name = vps.displayedObject.modelName
     for i in range (Nsegment):
         if i==0:
-            mdb.models['Model-1'].HeatTransferStep(timePeriod=period,deltmx=1500,\
+            mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
                 initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=FirstAMstep,previous=PreStepName)
         else:
-            mdb.models['Model-1'].HeatTransferStep(timePeriod=period,deltmx=1500,\
+            mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
                 initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i),previous=Name+str(number+i-1))
     if left != 0.0 :
-        mdb.models['Model-1'].HeatTransferStep(timePeriod=period_left,deltmx=1500,\
+        mdb.models[Model_name].HeatTransferStep(timePeriod=period_left,deltmx=1500,\
                 initialInc=0.001,maxInc=big_left,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i+1),previous=Name+str(number+i))
         print str(number+i+1)+" steps have been created after step "+PreStepName+"."
@@ -143,12 +145,12 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
     for i in range (Nsegment):
         pn[i]=tuple(pn[i])
         if i==0:
-            ele=mdb.models['Model-1'].rootAssembly.sets[CurrentPass].elements.\
+            ele=mdb.models[Model_name].rootAssembly.sets[CurrentPass].elements.\
                     getByBoundingCylinder(p1,pnf[i],5)
         else:
-            ele=mdb.models['Model-1'].rootAssembly.sets[CurrentPass].elements.\
+            ele=mdb.models[Model_name].rootAssembly.sets[CurrentPass].elements.\
                     getByBoundingCylinder(pnr[i-1],pnf[i],5)
-        mdb.models['Model-1'].ModelChange(activeInStep=True,createStepName=Name+str(number+i),\
+        mdb.models[Model_name].ModelChange(activeInStep=True,createStepName=Name+str(number+i),\
                 name='ADD'+str(number+i),region=Region(elements=ele),regionType=ELEMENTS)
 
     stepKeys = mdb.models["Model-1"].steps.keys()
@@ -162,7 +164,9 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
 
 
 def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
-    root = mdb.models['Model-1'].rootAssembly
+    vps = session.viewports.values()[0]
+    Model_name = vps.displayedObject.modelName
+    root = mdb.models[Model_name].rootAssembly
     Allel = root.sets[CurrentPass].elements
     Nele=len(Allel)
     AddEls=Eles*Layers
@@ -184,15 +188,15 @@ def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
     ## Add AM Steps
     for i in range (Nsegment):
         if i==0:
-            mdb.models['Model-1'].HeatTransferStep(timePeriod=period,deltmx=1500,\
+            mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
                 initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=FirstAMstep,previous=PreStepName)
         else:
-            mdb.models['Model-1'].HeatTransferStep(timePeriod=period,deltmx=1500,\
+            mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
                 initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i),previous=Name+str(number+i-1))
     if left != 0 :
-        mdb.models['Model-1'].HeatTransferStep(timePeriod=period_left,deltmx=1500,\
+        mdb.models[Model_name].HeatTransferStep(timePeriod=period_left,deltmx=1500,\
                 initialInc=0.001,maxInc=big_left,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i+1),previous=Name+str(number+i))
         print str(number+i+1)+" steps have been created after step "+PreStepName+"."
@@ -208,13 +212,13 @@ def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
     for i in range (Nsegment):
         ele = Allel[i*AddEls:(i+1)*AddEls]
         #root.Set(elements=ele,name='AddSet'+str(number+i))
-        mdb.models['Model-1'].ModelChange(activeInStep=True,createStepName=\
+        mdb.models[Model_name].ModelChange(activeInStep=True,createStepName=\
                 Name+str(number+i),name='ADD'+str(number+i),region=Region(elements=ele),\
                 regionType=ELEMENTS)
     if left != 0:
         ele = Allel[(i+1)*AddEls:Nele]
         #root.Set(elements=ele,name='AddSet'+str(number+i+1))
-        mdb.models['Model-1'].ModelChange(activeInStep=True,createStepName=\
+        mdb.models[Model_name].ModelChange(activeInStep=True,createStepName=\
                 Name+str(number+i+1),name='ADD'+str(number+i+1),region=\
                 Region(elements=ele),regionType=ELEMENTS)
 
@@ -405,8 +409,10 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,waste,
     highlight(point3)
 
     # Plot annotations in viewpoint
+    vps = session.viewports.values()[0]
+    Model_name = vps.displayedObject.modelName
     mo=mdb.models
-    ass = mdb.models[mo.keys()[0]].rootAssembly
+    ass = mdb.models[Model_name].rootAssembly
     session.viewports['Viewport: 1'].setValues(displayedObject=ass)
     session.viewports['Viewport: 1'].maximize()
     try:
