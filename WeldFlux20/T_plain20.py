@@ -206,18 +206,21 @@ def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
     ## activation
     E0 = Allel.getFromLabel(BEle)
     index = Allel.index(E0)
-    if index >= Eles:
-        Allel=mesh.MeshElementArray(list(reversed(Allel)))
     
     for i in range (Nsegment):
-        ele = Allel[i*AddEls:(i+1)*AddEls]
-        #root.Set(elements=ele,name='AddSet'+str(number+i))
+        if index >= Eles:
+            ele = Allel[Nele-AddEls*(i+1):Nele-AddEls*i]
+        else:
+            ele = Allel[i*AddEls:(i+1)*AddEls]
         mdb.models[Model_name].ModelChange(activeInStep=True,createStepName=\
                 Name+str(number+i),name='ADD'+str(number+i),region=Region(elements=ele),\
                 regionType=ELEMENTS)
+        
     if left != 0:
-        ele = Allel[(i+1)*AddEls:Nele]
-        #root.Set(elements=ele,name='AddSet'+str(number+i+1))
+        if index >= Eles:
+            ele = Allel[0:Nele-AddEls*(i+1)] 
+        else:
+            ele = Allel[(i+1)*AddEls:Nele]
         mdb.models[Model_name].ModelChange(activeInStep=True,createStepName=\
                 Name+str(number+i+1),name='ADD'+str(number+i+1),region=\
                 Region(elements=ele),regionType=ELEMENTS)
