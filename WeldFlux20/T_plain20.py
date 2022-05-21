@@ -153,8 +153,8 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
         mdb.models[Model_name].ModelChange(activeInStep=True,createStepName=Name+str(number+i),\
                 name='ADD'+str(number+i),region=Region(elements=ele),regionType=ELEMENTS)
 
-    stepKeys = mdb.models["Model-1"].steps.keys()
-    stepValues = mdb.models["Model-1"].steps.values()
+    stepKeys = mdb.models[Model_name].steps.keys()
+    stepValues = mdb.models[Model_name].steps.values()
     po = stepKeys.index(FirstAMstep)
     waste = 0.
     for i in range(1,po):
@@ -225,8 +225,8 @@ def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
                 Name+str(number+i+1),name='ADD'+str(number+i+1),region=\
                 Region(elements=ele),regionType=ELEMENTS)
 
-    stepKeys = mdb.models["Model-1"].steps.keys()
-    stepValues = mdb.models["Model-1"].steps.values()
+    stepKeys = mdb.models[Model_name].steps.keys()
+    stepValues = mdb.models[Model_name].steps.values()
     po = stepKeys.index(FirstAMstep)
     waste = 0.
     for i in range(1,po):
