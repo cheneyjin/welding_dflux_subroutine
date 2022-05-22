@@ -77,21 +77,27 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
         big = period
     if period_left < 0.1:
         big_left = period_left
+    ini=0.001
+    ini_left=0.001
+    if period < 0.001:
+        ini= 0.2*period
+    if period_left < 0.001:
+        ini_left=0.2*period_left
     ## Add AM Steps
     vps = session.viewports.values()[0]
     Model_name = vps.displayedObject.modelName
     for i in range (Nsegment):
         if i==0:
             mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
-                initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
+                initialInc=ini,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=FirstAMstep,previous=PreStepName)
         else:
             mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
-                initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
+                initialInc=ini,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i),previous=Name+str(number+i-1))
     if left != 0.0 :
         mdb.models[Model_name].HeatTransferStep(timePeriod=period_left,deltmx=1500,\
-                initialInc=0.001,maxInc=big_left,maxNumInc=1000,minInc=1e-6,\
+                initialInc=ini_left,maxInc=big_left,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i+1),previous=Name+str(number+i))
         print str(number+i+1)+" steps have been created after step "+PreStepName+"."
     else:
@@ -185,19 +191,25 @@ def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
         big = period
     if period_left < 0.1:
         big_left = period_left
+        ini=0.001
+    ini_left=0.001
+    if period < 0.001:
+        ini= 0.2*period
+    if period_left < 0.001:
+        ini_left=0.2*period_left
     ## Add AM Steps
     for i in range (Nsegment):
         if i==0:
             mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
-                initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
+                initialInc=ini,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=FirstAMstep,previous=PreStepName)
         else:
             mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
-                initialInc=0.001,maxInc=big,maxNumInc=1000,minInc=1e-6,\
+                initialInc=ini,maxInc=big,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i),previous=Name+str(number+i-1))
     if left != 0 :
         mdb.models[Model_name].HeatTransferStep(timePeriod=period_left,deltmx=1500,\
-                initialInc=0.001,maxInc=big_left,maxNumInc=1000,minInc=1e-6,\
+                initialInc=ini_left,maxInc=big_left,maxNumInc=1000,minInc=1e-6,\
                 name=Name+str(number+i+1),previous=Name+str(number+i))
         print str(number+i+1)+" steps have been created after step "+PreStepName+"."
     else:
@@ -612,16 +624,16 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     if angle < 0:
             f.writelines("      w = -vel/"+str(r)+'\n')
             if EnAM == True:
-                f.writelines("      theta = w*time(2)-"+str(waste)+'\n')
-                f.writelines("      theta2 = w*time(2)-"+str(waste)+"-3.1416/3"+'\n')
+                f.writelines("      theta = w*(time(2)-"+str(waste)+')\n')
+                f.writelines("      theta2 = w*(time(2)-"+str(waste)+")-3.1416/3"+'\n')
             else:
                 f.writelines("      theta = w*time(1)"+'\n')
                 f.writelines("      theta2 = w*time(1)-3.1416/3"+'\n')
     else:
             f.writelines("      w = vel/"+str(r)+'\n')
             if EnAM == True:
-                f.writelines("      theta = w*time(2)-"+str(waste)+'\n')
-                f.writelines("      theta2 = w*time(2)-"+str(waste)+"+3.1416/3"+'\n')
+                f.writelines("      theta = w*(time(2)-"+str(waste)+')\n')
+                f.writelines("      theta2 = w*(time(2)-"+str(waste)+")+3.1416/3"+'\n')
             else:
                 f.writelines("      theta = w*time(1)"+'\n')
                 f.writelines("      theta2 = w*time(1)+3.1416/3"+'\n')
