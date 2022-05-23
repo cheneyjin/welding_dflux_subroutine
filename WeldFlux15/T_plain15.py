@@ -219,39 +219,34 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     # Plot annotations in viewpoint
     mo=mdb.models
     ass = mdb.models[mo.keys()[0]].rootAssembly
-    session.viewports['Viewport: 1'].setValues(displayedObject=ass)
-    session.viewports['Viewport: 1'].maximize()
-    try:
-        del session.viewports['Viewport: 2']
-    except:
-        pass
+    vps = session.viewports.values()[0]
 
     ar = (mdb.Arrow(name='StartArrow', startPoint=(35., 30.), startAnchor=(p1[0], 
 	    p1[1], p1[2]), endAnchor=(p1[0], p1[1], p1[2]), color='#FFFFFF', 
 	    lineThickness=MEDIUM))
-    session.viewports['Viewport: 1'].plotAnnotation(annotation=ar)
+    vps.plotAnnotation(annotation=ar)
     t = (mdb.Text(name='StartPoint', text='StartPoint', offset=(35, 30.), 
 	 anchor=(p1[0], p1[1], p1[2]), font='-*-arial-bold-r-normal-*-*-120-*-*-p-*-*-*', 
 	 backgroundStyle=OTHER, backgroundColor='#FF0000', box=ON))
-    session.viewports['Viewport: 1'].plotAnnotation(annotation=t)
+    vps.plotAnnotation(annotation=t)
     ar = (mdb.Arrow(name='AlongArrow', startPoint=(-25., 40.), startAnchor=(p2[0], p2[1], p2[2]), 
 	    endAnchor=(p2[0], p2[1], p2[2]), color='#FFFFFF', lineThickness=MEDIUM))
-    session.viewports['Viewport: 1'].plotAnnotation(annotation=ar)
+    vps.plotAnnotation(annotation=ar)
     t = (mdb.Text(name='AlongPoint', text='AlongPoint', offset=(-25., 40.), anchor=(p2[0], p2[1], p2[2]), 
 	    referencePoint=BOTTOM_CENTER, font='-*-arial-bold-r-normal-*-*-120-*-*-p-*-*-*', 
 	    backgroundStyle=OTHER, backgroundColor='#0000FF', box=ON))
-    session.viewports['Viewport: 1'].plotAnnotation(annotation=t)
+    vps.plotAnnotation(annotation=t)
     ar = (mdb.Arrow(name='VerticalArrow', startPoint=(18., 43.), startAnchor=(p3[0], p3[1], p3[2]), 
 		    endAnchor=(p3[0], p3[1], p3[2]), color='#FFFFFF', lineThickness=MEDIUM))
-    session.viewports['Viewport: 1'].plotAnnotation(annotation=ar)
+    vps.plotAnnotation(annotation=ar)
     t = (mdb.Text(name='ToePoint', text='ToePoint', offset=(18., 43.), anchor=(p3[0], p3[1], p3[2]), 
 		    referencePoint=BOTTOM_CENTER, font='-*-arial-bold-r-normal-*-*-120-*-*-p-*-*-*', 
 		    backgroundStyle=OTHER, backgroundColor='#FF7F00', box=ON))
-    session.viewports['Viewport: 1'].plotAnnotation(annotation=t)
+    vps.plotAnnotation(annotation=t)
     ar = (mdb.Arrow(name='EndArrow', startPoint=(0., 0.), endPoint=(0.,0.),startAnchor=(p1[0], p1[1], p1[2]), 
 	    endAnchor=(p2[0], p2[1], p2[2]), color='#FF0000', startHeadStyle=HOLLOW_CIRCLE,
 	    lineStyle=DASHED,lineThickness=THICK))
-    session.viewports['Viewport: 1'].plotAnnotation(annotation=ar)
+    vps.plotAnnotation(annotation=ar)
     return
 
 def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4):
