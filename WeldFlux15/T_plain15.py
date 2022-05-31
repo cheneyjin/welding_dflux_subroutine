@@ -139,70 +139,70 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     f.writelines("      INCLUDE 'ABA_PARAM.INC'\n")
     f.writelines("      DIMENSION COORDS(3),FLUX(2),TIME(2)\n")
     f.writelines("      CHARACTER*80 SNAME\n\n")
-    f.writelines("          a = "+str(a)+'\n')
-    f.writelines("          b = "+str(b)+'\n')
+    f.writelines("      a = "+str(a)+'\n')
+    f.writelines("      b = "+str(b)+'\n')
 
     if mtype=='Double Ellipsoid':
-        f.writelines("          c = "+str(c)+'\n')
-        f.writelines("          a2= "+str(a2)+'\n')
-        f.writelines("          ratio= "+str(ratio)+'\n')
+        f.writelines("      c = "+str(c)+'\n')
+        f.writelines("      a2= "+str(a2)+'\n')
+        f.writelines("      ratio= "+str(ratio)+'\n')
         fr=round(2./(1+float(ratio)),8)
         ff=2.-fr
-        f.writelines("          ff= "+str(ff)+'\n')
-        f.writelines("          fr= "+str(fr)+'\n')
+        f.writelines("      ff= "+str(ff)+'\n')
+        f.writelines("      fr= "+str(fr)+'\n')
         
     if mtype=='Cone Body':
-	    f.writelines("          c = "+str(c)+'\n')
+	    f.writelines("      c = "+str(c)+'\n')
 
-    f.writelines("          CI = "+str(current)+'\n')
-    f.writelines("          U = "+str(vol)+'\n')
-    f.writelines("          vel = "+str(vel)+'\n')
-    f.writelines("          yita= "+str(eff)+'\n')
-    f.writelines("          power = 1000.*yita*U*CI\n")
+    f.writelines("      CI = "+str(current)+'\n')
+    f.writelines("      U = "+str(vol)+'\n')
+    f.writelines("      vel = "+str(vel)+'\n')
+    f.writelines("      yita= "+str(eff)+'\n')
+    f.writelines("      power = 1000.*yita*U*CI\n")
     # Calculate distance from M_Plain
-    f.writelines("          yy = (" +str(Am)+ "*coords(1)+\n")
+    f.writelines("      yy = (" +str(Am)+ "*coords(1)+\n")
     f.writelines("     &     "+str(Bm)+"*coords(2)+" + str(Cm)+'\n')
     f.writelines("     &     *coords(3)+"+str(Dm)+")**2/"+str(dmm)+'\n')
     
     # Calculate distance from N_plain
-    f.writelines("          xn = "+str(An)+ "*coords(1)+" + str(Bn)+"*coords(2)+\n")
-    f.writelines("     $     "+ str(Cn)+"*coords(3)+"+str(Dn)+"\n")
-    f.writelines("          disx = xn/"+str(dn)+'\n')
-    f.writelines("          vt = vel*time(1)\n")
-    f.writelines("          x = vt - disx\n")
-    f.writelines("          xx = x*x\n")
+    f.writelines("      xn = "+str(An)+ "*coords(1)+" + str(Bn)+"*coords(2)+\n")
+    f.writelines("     &     "+ str(Cn)+"*coords(3)+"+str(Dn)+"\n")
+    f.writelines("      disx = xn/"+str(dn)+'\n')
+    f.writelines("      vt = vel*time(1)\n")
+    f.writelines("      x = vt - disx\n")
+    f.writelines("      xx = x*x\n")
 
     # Write DFLUX for Planar Gauss
     if mtype=='Planar Gauss':
-        f.writelines("          qm=3*power/3.1416/a/b\n")
-        f.writelines("          FLUX(1)= qm*EXP(-3*(xx/a/a+yy/b/b))\n")
+        f.writelines("      qm=3*power/3.1416/a/b\n")
+        f.writelines("      FLUX(1)= qm*EXP(-3*(xx/a/a+yy/b/b))\n")
     
     # Write DFLUX for Double Ellipsoid
     elif mtype=='Double Ellipsoid':
-        f.writelines("          qm1=1.8663*ff*power/a/b/c\n")
-        f.writelines("          qm2=1.8663*fr*power/a2/b/c\n")
+        f.writelines("      qm1=1.8663*ff*power/a/b/c\n")
+        f.writelines("      qm2=1.8663*fr*power/a2/b/c\n")
         # Calculate distance from W_Plain
-        f.writelines("       zz = (" +str(Aw)+ "*coords(1)+\n")
+        f.writelines("      zz = (" +str(Aw)+ "*coords(1)+\n")
         f.writelines("     &  "+str(Bw)+"*coords(2)+" + str(Cw)+ "*coords(3)+\n")
         f.writelines("     &  "+str(Dw)+")**2/"+str(dww)+'\n')
-        f.writelines("       if (disx.GE.vt) THEN\n")
+        f.writelines("      if (disx.GE.vt) THEN\n")
         f.writelines("        FLUX(1)=qm1*EXP(-3*(xx/a/a+yy/b/b+zz/c/c))\n")
-        f.writelines("       else\n")
+        f.writelines("      else\n")
         f.writelines("        FLUX(1)=qm2*EXP(-3*(xx/a2/a2+yy/b/b+zz/c/c))\n")
-        f.writelines("       end if\n")
+        f.writelines("      end if\n")
 
     # Write DFLUX for Cone
     elif mtype=='Cone Body':
-        f.writelines("       qm=9.*power*20.085537/3.1416/19.085537\n")
-        f.writelines("       zz = (" +str(Aw)+ "*coords(1)+\n")
+        f.writelines("      qm=9.*power*20.085537/3.1416/19.085537\n")
+        f.writelines("      zz = (" +str(Aw)+ "*coords(1)+\n")
         f.writelines("     &  "+str(Bw)+"*coords(2)+" + str(Cw)+ "*coords(3)+\n")
         f.writelines("     &  "+str(Dw)+")**2/"+str(dww)+'\n')
-        f.writelines("       if (zz > c*c) then\n")
+        f.writelines("      if (zz > c*c) then\n")
         f.writelines("          FLUX(1)=0.0\n")
-        f.writelines("       else\n")
+        f.writelines("      else\n")
         f.writelines("          r0 = a-(a-b)*zz**0.5/c\n")
         f.writelines("          FLUX(1)=qm*EXP(-3*(xx+yy)/r0/r0)/c/(a*a+a*b+b*b)\n")
-        f.writelines("       end if\n")
+        f.writelines("      end if\n")
     
 
     f.writelines("      return\n")
@@ -381,12 +381,12 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines("c        This subrotine is generated by WeldFlux v1.5                c\n")      
     f.writelines("c                 on "+str(ontime)+"                             c\n\n")
     f.writelines("c=====================================================================\n\n")
+    f.writelines("      INCLUDE 'dis.inc'\n")
     f.writelines("      SUBROUTINE DFLUX(FLUX,SOL,KSTEP,KINC,TIME,NOEL,NPT,COORDS,JLTYP,\n")
     f.writelines("     1     TEMP,PRESS,SNAME)\n")
+    f.writelines("      use dis\n")
     f.writelines("      INCLUDE 'ABA_PARAM.INC'\n")
     f.writelines("      DIMENSION COORDS(3),FLUX(2),TIME(2)\n")
-    f.writelines("      real*8 Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww\n")
-    f.writelines("      real*8 p1x,p1y,p1z,p2x,p2y,p2z,p3x,p3y,p3z\n")
     f.writelines("      CHARACTER*80 SNAME\n\n")
     f.writelines("      a = "+str(a)+'\n')
     f.writelines("      b = "+str(b)+'\n')
@@ -434,55 +434,55 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines("     &  Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww)\n\n")
         
     # Calculate distance from M_Plain
-    f.writelines("          yy = (Am*coords(1)+\n")
-    f.writelines("     &     Bm*coords(2)+Cm\n")
-    f.writelines("     &     *coords(3)+Dm)**2/dmm\n\n")
+    f.writelines("      yy = (Am*coords(1)+Bm*coords(2)+Cm*coords(3)+Dm)**2/dmm\n")
         
     # Calculate distance from N_plain
-    f.writelines("          xn = An*coords(1)+Bn*coords(2)+\n")
-    f.writelines("     &     Cn*coords(3)+Dn\n")
-    f.writelines("          disx = xn/disn\n")
-    f.writelines("          xx = disx*disx\n")
+    f.writelines("      xn = An*coords(1)+Bn*coords(2)+Cn*coords(3)+Dn\n")
+    f.writelines("      disx = xn/disn\n")
+    f.writelines("      xx = disx*disx\n")
 
     # Write DFLUX for Planar Gauss
     if mtype=='Planar Gauss':
-            f.writelines("          qm=3*power/3.1416/a/b\n")
-            f.writelines("          FLUX(1)= qm*EXP(-3*(xx/a/a+yy/b/b))\n")
+            f.writelines("      qm=3*power/3.1416/a/b\n")
+            f.writelines("      FLUX(1)= qm*EXP(-3*(xx/a/a+yy/b/b))\n")
         
     # Write DFLUX for Double Ellipsoid
     if mtype=='Double Ellipsoid':
-            f.writelines("          qm1=1.8663*ff*power/a/b/c\n")
-            f.writelines("          qm2=1.8663*fr*power/a2/b/c\n")
+            f.writelines("      qm1=1.8663*ff*power/a/b/c\n")
+            f.writelines("      qm2=1.8663*fr*power/a2/b/c\n")
             # Calculate distance from W_Plain
-            f.writelines("       zz = (Aw*coords(1)+\n")
-            f.writelines("     &  Bw*coords(2)+Cw*coords(3)+\n")
-            f.writelines("     &  Dw)**2/dww\n")
-            f.writelines("       if (disx.GE.0.0) THEN\n")
+            f.writelines("      zz = (Aw*coords(1)+Bw*coords(2)+Cw*coords(3)+Dw)**2/dww\n")
+            f.writelines("      if (disx.GE.0.0) THEN\n")
             f.writelines("        FLUX(1)=qm1*EXP(-3*(xx/a/a+yy/b/b+zz/c/c))\n")
-            f.writelines("       else\n")
+            f.writelines("      else\n")
             f.writelines("        FLUX(1)=qm2*EXP(-3*(xx/a2/a2+yy/b/b+zz/c/c))\n")
-            f.writelines("       end if\n")
+            f.writelines("      end if\n")
 
     # Write DFLUX for Cone
     if mtype=='Cone Body':
-            f.writelines("       qm=9.*power*20.085537/3.1416/19.085537\n")
+            f.writelines("      qm=9.*power*20.085537/3.1416/19.085537\n")
             # Calculate distance from W_Plain
-            f.writelines("       zz = (Aw*coords(1)+\n")
-            f.writelines("     &  Bw*coords(2)+Cw*coords(3)+\n")
-            f.writelines("     &  Dw**2/dww\n")
-            f.writelines("       if (zz > c*c) then\n")
-            f.writelines("          FLUX(1)=0.0\n")
-            f.writelines("       else\n")
-            f.writelines("          r0 = a-(a-b)*zz**0.5/c\n")
-            f.writelines("          FLUX(1)=qm*EXP(-3*(xx+yy)/r0/r0)/c/(a*a+a*b+b*b)\n")
-            f.writelines("       end if\n")
+            f.writelines("      zz = (Aw*coords(1)+Bw*coords(2)+Cw*coords(3)+Dw**2/dww\n")
+            f.writelines("      if (zz > c*c) then\n")
+            f.writelines("        FLUX(1)=0.0\n")
+            f.writelines("      else\n")
+            f.writelines("        r0 = a-(a-b)*zz**0.5/c\n")
+            f.writelines("        FLUX(1)=qm*EXP(-3*(xx+yy)/r0/r0)/c/(a*a+a*b+b*b)\n")
+            f.writelines("      end if\n")
     f.writelines("      return\n")
     f.writelines("      end\n\n")
 
+    f.close()
+    pwd=os.getcwd()
+    print ("The welding subroutine has been saved in '"+pwd+"\dflux.for' successfully!")
+
+    f=open('./dis.inc', 'w')
+    f.writelines("      Module dis\n")
+    f.writelines("        real:: Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww\n")
+    f.writelines("        real:: p1x,p1y,p1z,p2x,p2y,p2z,p3x,p3y,p3z\n")
+    f.writelines("      contains\n")
     f.writelines("      SUBROUTINE DISTANCE (p1x,p1y,p1z,p2x,p2y,p2z,p3x,p3y,p3z,\n")
     f.writelines("     &  Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww)\n\n")
-    f.writelines("      real*8 Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww\n")
-    f.writelines("      real*8 p1x,p1y,p1z,p2x,p2y,p2z,p3x,p3y,p3z\n\n")
     # Calculate W_Plain
     f.writelines('      Aw = (p2y-p1y)*(p3z-p1z)-(p2z-p1z)*(p3y-p1y)\n')
     f.writelines('      Bw = (p2z-p1z)*(p3x-p1x)-(p2x-p1x)*(p3z-p1z)\n')
@@ -504,13 +504,10 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines('      Dn = -(An*p1x+Bn*p1y+Cn*p1z)\n')
     f.writelines('      dnn= An*An+Bn*Bn+Cn*Cn\n')
     f.writelines('      disn = sqrt(dnn)\n\n')
-    f.writelines('      RETURN\n')
-    f.writelines('      END\n')
+    f.writelines('      END subroutine DISTANCE\n')
+    f.writelines('      END Module dis\n')
 
-        
     f.close()
-    pwd=os.getcwd()
-    print ("The welding subroutine has been saved in '"+pwd+"\dflux.for' successfully!")
 
     # Highlight points 
     highlight(point1)
