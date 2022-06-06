@@ -217,9 +217,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
     highlight(point3)
 
     # Plot annotations in viewpoint
-    mo=mdb.models
-    ass = mdb.models[mo.keys()[0]].rootAssembly
-    vps = session.viewports.values()[0]
+    vps = session.viewports[session.currentViewportName]
 
     ar = (mdb.Arrow(name='StartArrow', startPoint=(35., 30.), startAnchor=(p1[0], 
 	    p1[1], p1[2]), endAnchor=(p1[0], p1[1], p1[2]), color='#FFFFFF', 
