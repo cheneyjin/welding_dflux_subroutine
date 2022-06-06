@@ -84,7 +84,7 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
     if period_left < 0.001:
         ini_left=0.2*period_left
     ## Add AM Steps
-    vps = session.viewports.values()[0]
+    vps = session.viewports[session.currentViewportName]
     Model_name = vps.displayedObject.modelName
     for i in range (Nsegment):
         if i==0:
@@ -170,7 +170,7 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
 
 
 def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
-    vps = session.viewports.values()[0]
+    vps = session.viewports[session.currentViewportName]
     Model_name = vps.displayedObject.modelName
     root = mdb.models[Model_name].rootAssembly
     Allel = root.sets[CurrentPass].elements
@@ -424,7 +424,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,waste,
     highlight(point3)
 
     # Plot annotations in viewpoint
-    vps = session.viewports.values()[0]
+    vps = session.viewports[session.currentViewportName]
     Model_name = vps.displayedObject.modelName
     mo=mdb.models
     ass = mdb.models[Model_name].rootAssembly
