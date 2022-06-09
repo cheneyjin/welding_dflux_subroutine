@@ -83,6 +83,7 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
         ini= 0.2*period
     if period_left < 0.001:
         ini_left=0.2*period_left
+
     ## Add AM Steps
     vps = session.viewports[session.currentViewportName]
     Model_name = vps.displayedObject.modelName
@@ -298,21 +299,18 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,waste,
     print "The weld direction is towards: ",p2
     print "The toe point(p3) is: ",p3
 
-    # Calculate W_Plain
     Aw = (p2[1]-p1[1])*(p3[2]-p1[2])-(p2[2]-p1[2])*(p3[1]-p1[1])
     Bw = (p2[2]-p1[2])*(p3[0]-p1[0])-(p2[0]-p1[0])*(p3[2]-p1[2])
     Cw = (p2[0]-p1[0])*(p3[1]-p1[1])-(p2[1]-p1[1])*(p3[0]-p1[0])
     Dw = -(Aw*p1[0]+Bw*p1[1]+Cw*p1[2])
     dww = Aw*Aw+Bw*Bw+Cw*Cw
 
-    # Calculate M_Plain
     Am = (p2[1]-p1[1])*Cw-(p2[2]-p1[2])*Bw
     Bm = (p2[2]-p1[2])*Aw-(p2[0]-p1[0])*Cw
     Cm = (p2[0]-p1[0])*Bw-(p2[1]-p1[1])*Aw
     Dm = -(Am*p1[0]+Bm*p1[1]+Cm*p1[2])
     dmm = Am*Am+Bm*Bm+Cm*Cm
 
-    # Calculate N_Plain
     An = p2[0]-p1[0]
     Bn = p2[1]-p1[1]
     Cn = p2[2]-p1[2]
@@ -362,12 +360,10 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,waste,
     f.writelines("          vel = "+str(vel)+'\n')
     f.writelines("          yita= "+str(eff)+'\n')
     f.writelines("          power = 1000.*yita*U*CI\n")
-    # Calculate distance from M_Plain
     f.writelines("          yy = (" +str(Am)+ "*coords(1)+\n")
     f.writelines("     &     "+str(Bm)+"*coords(2)+" + str(Cm)+'\n')
     f.writelines("     &     *coords(3)+"+str(Dm)+")**2/"+str(dmm)+'\n')
     
-    # Calculate distance from N_plain
     f.writelines("          xn = "+str(An)+ "*coords(1)+" + str(Bn)+"*coords(2)+\n")
     f.writelines("     $     "+ str(Cn)+"*coords(3)+"+str(Dn)+"\n")
     f.writelines("          disx = xn/"+str(dn)+'\n')
@@ -388,7 +384,6 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,waste,
     elif mtype=='Double Ellipsoid':
         f.writelines("          qm1=1.8663*ff*power/a/b/c\n")
         f.writelines("          qm2=1.8663*fr*power/a2/b/c\n")
-        # Calculate distance from W_Plain
         f.writelines("       zz = (" +str(Aw)+ "*coords(1)+\n")
         f.writelines("     &  "+str(Bw)+"*coords(2)+" + str(Cw)+ "*coords(3)+\n")
         f.writelines("     &  "+str(Dw)+")**2/"+str(dww)+'\n')
@@ -464,7 +459,6 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,waste,
     return
 
 def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4,waste,EnAM):
-    # Obtain the coordinates of the four points
     t1 = type(point1)
     t2 = type(point2)
     t3 = type(point3)
@@ -537,11 +531,6 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     bv = np.cross(normal, op1)  
     av = op1 / np.linalg.norm(op1) 
     bv = bv / np.linalg.norm(bv)
-    '''
-        x = o[0] + r * a[0] * np.cos(theta) + r * b[0] * np.sin(theta)  # x on circle
-        y = o[1] + r * a[1] * np.cos(theta) + r * b[1] * np.sin(theta)  # y on circle
-        z = o[2] + r * a[2] * np.cos(theta) + r * b[2] * np.sin(theta)  # z on circle
-    '''
     o = np.round(o,8)
     av = np.round(av,4)
     bv = np.round(bv,4)
@@ -555,21 +544,15 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     p2z = str(o[2])+'+'+str(2*r*av[2])+'*cos(theta2)+'+str(2*r*bv[2])+'*sin(theta2)'
 
 
-    # distance to plain, toe circle center, radius, 
     d = point2area(p1,p2,p3,p4)
     n = np.linalg.norm(normal)
     o1=np.array([o[0]+d*normal[0]/n,o[1]+d*normal[1]/n,o[2]+d*normal[2]/n])
     o1p4= p4 - o1
-    r1 = np.linalg.norm(o1-p4)#o1-p4 distance 
+    r1 = np.linalg.norm(o1-p4) 
 
     b1 = np.cross(normal, o1p4)  
     a1 = o1p4 / np.linalg.norm(o1p4) 
     b1 = b1 / np.linalg.norm(b1) 
-    '''
-        x3 = o1[0] + r1 * a1[0] * np.cos(theta) + r1 * b1[0] * np.sin(theta)  
-        y3 = o1[1] + r1 * a1[1] * np.cos(theta) + r1 * b1[1] * np.sin(theta)  
-        z3 = o1[2] + r1 * a1[2] * np.cos(theta) + r1 * b1[2] * np.sin(theta) 
-    '''
     o1 = np.round(o1,8)
     a1 = np.round(a1,4)
     r1 = np.round(r1,4)
@@ -655,10 +638,8 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines("      CALL DISTANCE (p1x,p1y,p1z,p2x,p2y,p2z,p3x,p3y,p3z,\n")
     f.writelines("     &  Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww)\n\n")
         
-    # Calculate distance from M_Plain
     f.writelines("      yy = (Am*coords(1)+Bm*coords(2)+Cm*coords(3)+Dm)**2/dmm\n")
         
-    # Calculate distance from N_plain
     f.writelines("          xn = An*coords(1)+Bn*coords(2)+Cn*coords(3)+Dn\n")
     f.writelines("          disx = xn/disn\n")
     f.writelines("          xx = disx*disx\n")
@@ -672,7 +653,6 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     if mtype=='Double Ellipsoid':
             f.writelines("          qm1=1.8663*ff*power/a/b/c\n")
             f.writelines("          qm2=1.8663*fr*power/a2/b/c\n")
-            # Calculate distance from W_Plain
             f.writelines("       zz = (Aw*coords(1)+\n")
             f.writelines("     &  Bw*coords(2)+Cw*coords(3)+\n")
             f.writelines("     &  Dw)**2/dww\n")
@@ -685,7 +665,6 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     # Write DFLUX for Cone
     if mtype=='Cone Body':
             f.writelines("       qm=9.*power*20.085537/3.1416/19.085537\n")
-            # Calculate distance from W_Plain
             f.writelines("       zz = (Aw*coords(1)+\n")
             f.writelines("     &  Bw*coords(2)+Cw*coords(3)+\n")
             f.writelines("     &  Dw**2/dww\n")
@@ -708,21 +687,18 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines("      contains\n")
     f.writelines("      SUBROUTINE DISTANCE (p1x,p1y,p1z,p2x,p2y,p2z,p3x,p3y,p3z,\n")
     f.writelines("     &  Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww)\n\n")
-    # Calculate W_Plain
     f.writelines('      Aw = (p2y-p1y)*(p3z-p1z)-(p2z-p1z)*(p3y-p1y)\n')
     f.writelines('      Bw = (p2z-p1z)*(p3x-p1x)-(p2x-p1x)*(p3z-p1z)\n')
     f.writelines('      Cw = (p2x-p1x)*(p3y-p1y)-(p2y-p1y)*(p3x-p1x)\n')
     f.writelines('      Dw = -(Aw*p1x+Bw*p1y+Cw*p1z)\n')
     f.writelines('      dww = Aw*Aw+Bw*Bw+Cw*Cw\n\n')
 
-    # Calculate M_Plain
     f.writelines('      Am = (p2y-p1y)*Cw-(p2z-p1z)*Bw\n')
     f.writelines('      Bm = (p2z-p1z)*Aw-(p2x-p1x)*Cw\n')
     f.writelines('      Cm = (p2x-p1x)*Bw-(p2y-p1y)*Aw\n')
     f.writelines('      Dm = -(Am*p1x+Bm*p1y+Cm*p1z)\n')
     f.writelines('      dmm = Am*Am+Bm*Bm+Cm*Cm\n\n')
 
-    # Calculate N_Plain
     f.writelines('      An = p2x-p1x\n')
     f.writelines('      Bn = p2y-p1y\n')
     f.writelines('      Cn = p2z-p1z\n')
@@ -806,7 +782,6 @@ def define_area(point1, point2, point3):
     AB = np.asmatrix(point2 - point1)
     AC = np.asmatrix(point3 - point1)
     N = np.cross(AB, AC) 
-    # Ax+By+Cz
     Ax = N[0, 0]
     By = N[0, 1]
     Cz = N[0, 2]
@@ -817,7 +792,6 @@ def point2area(point1, point2, point3, point4):
     Ax, By, Cz, D = define_area(point1, point2, point3)
     mod_d = Ax * point4[0] + By * point4[1] + Cz * point4[2] + D
     mod_area = np.sqrt(np.sum(np.square([Ax, By, Cz])))
-    #d = abs(mod_d) / mod_area
     d = mod_d / mod_area
     return d
 
