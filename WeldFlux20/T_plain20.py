@@ -192,7 +192,7 @@ def ADDC(vel,PreStepName,FirstAMstep,CurrentPass,Length,Layers,BEle,Eles):
         big = period
     if period_left < 0.1:
         big_left = period_left
-        ini=0.001
+    ini=0.001
     ini_left=0.001
     if period < 0.001:
         ini= 0.2*period
