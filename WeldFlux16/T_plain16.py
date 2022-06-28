@@ -431,7 +431,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
 
     if mtype=='Cone Body':
             f.writelines("      qm=9.*power*20.085537/3.1416/19.085537\n")
-            f.writelines("      zz = (Aw*coords(1)+Bw*coords(2)+Cw*coords(3)+Dw**2/dww\n")
+            f.writelines("      zz = (Aw*coords(1)+Bw*coords(2)+Cw*coords(3)+Dw)**2/dww\n")
             f.writelines("      if (zz > c*c) then\n")
             f.writelines("        FLUX(1)=0.0\n")
             f.writelines("      else\n")
