@@ -65,8 +65,8 @@ class WeldFlux16_plugin(AFXForm):
         self.point2Kw1 = AFXObjectKeyword(self.cmd, 'point2', TRUE, pickedDefault)
         self.point3Kw1 = AFXObjectKeyword(self.cmd, 'point3', TRUE, pickedDefault)
         self.point4Kw1 = AFXObjectKeyword(self.cmd, 'point4', TRUE, pickedDefault)
-        self.toepath1Kw= AFXObjectKeyword(self.cmd, 'toepath1', TRUE, pickedDefault)
-        self.toepath2Kw= AFXObjectKeyword(self.cmd, 'toepath2', TRUE, pickedDefault)
+        self.toepath1Kw1= AFXObjectKeyword(self.cmd, 'toepath1', TRUE, pickedDefault)
+        self.toepath2Kw1= AFXObjectKeyword(self.cmd, 'toepath2', TRUE, pickedDefault)
         self.point1Kw2 = AFXTupleKeyword(self.cmd, 'point1', True,
             3, 3, AFXTUPLE_TYPE_FLOAT)
         self.point2Kw2 = AFXTupleKeyword(self.cmd, 'point2', True,
@@ -76,10 +76,9 @@ class WeldFlux16_plugin(AFXForm):
         self.point3Kw2.setValuesForBlanks('0')
         self.point4Kw2 = AFXTupleKeyword(self.cmd, 'point4', True,
             3, 3, AFXTUPLE_TYPE_FLOAT)
-        #self.toepath1Kw2 = AFXTupleKeyword(self.cmd, 'toepath1', True,
-        #    3, 3, AFXTUPLE_TYPE_FLOAT)
-        #self.toepath2Kw2 = AFXTupleKeyword(self.cmd, 'toepath2', True,
-        #    3, 3, AFXTUPLE_TYPE_FLOAT)
+        self.toepath1Kw2 = 'toepathset1'
+        self.toepath2Kw2 = 'toepathset2'
+
 
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
