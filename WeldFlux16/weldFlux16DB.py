@@ -213,7 +213,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.tpath1Label = FXLabel(p=pickHf, text='Toe Path1:    ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler2(form, form.toepath1Kw1, form.toepath1Kw2,'Pick nodes on weld toe1', NODES, MANY,self.tpath1Label)
+        pickHandler = WeldFlux16DBPickHandler2(form, form.toepath1Kw,'Pick nodes on weld toe1', NODES, MANY,self.tpath1Label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.Tpath1=FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -224,7 +224,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.tpath2Label = FXLabel(p=pickHf, text='Toe Path2:    ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler2(form, form.toepath2Kw1, form.toepath2Kw2,'Pick nodes on weld toe2', NODES, MANY,self.tpath2Label)
+        pickHandler = WeldFlux16DBPickHandler2(form, form.toepath2Kw,'Pick nodes on weld toe2', NODES, MANY,self.tpath2Label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.Tpath2=FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -413,11 +413,10 @@ class WeldFlux16DBPickHandler2(AFXProcedure):
         count = 0
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        def __init__(self, form, keyword1,keyword2, prompt, entitiesToPick, numberToPick, label):
+        def __init__(self, form, keyword, prompt, entitiesToPick, numberToPick, label):
 
                 self.form = form
-                self.keyword1 = keyword1
-                self.keyword2 = keyword2
+                self.keyword = keyword
                 self.prompt = prompt
                 self.entitiesToPick = entitiesToPick # Enum value
                 self.numberToPick = numberToPick # Enum value
@@ -431,10 +430,8 @@ class WeldFlux16DBPickHandler2(AFXProcedure):
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         def getFirstStep(self):
-                #self.keyword.setValueToDefault(True)
-                step = AFXPickStep(self, self.keyword1, self.prompt, 
+                step = AFXPickStep(self, self.keyword, self.prompt, 
                     self.entitiesToPick, self.numberToPick, sequenceStyle=TUPLE)
-                step.addNodeSetSelection(self.keyword2)
 
                 return  step
 

@@ -37,8 +37,7 @@ import math
 #   Using mm-tonne-s units by default.
 #===========================================================================
 
-def kernel(current, vol,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,point4,
-        toepath1,toepath2):
+def kernel(current, vol,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,point4):
     if wtype == 'Line':
         T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point4)
 
@@ -46,7 +45,13 @@ def kernel(current, vol,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,
         Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4)
 
     elif wtype == 'Free path':
-        Free(current, vol,vel,eff,mtype,a,b,c,a2,ratio)
+        reply=getWarningReply('The FREE PATH feature requires the purchase of Pro Version!\n\
+            Contact E-mail: Cheneyjin@gmail.com', (YES, NO))
+        if reply==YES:
+            print 'Contact us for advanced features!'
+            print 'Email: Cheneyjin@gmail.com'
+        elif reply==NO:
+            print 'Process terminated! Try other features.'
     return
 
 def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3):
@@ -565,14 +570,6 @@ def getAngle(normal, v1,v2):
         angle = -angle
     return angle
 
-def Free(current, vol,vel,eff,mtype,a,b,c,a2,ratio):
-    reply=getWarningReply('The FREE PATH feature requires the purchase of Pro Version!\n\
-            Contact E-mail: Cheneyjin@gmail.com', (YES, NO))
-    if reply==YES:
-        print 'Contact us for advanced features!'
-        print 'Email: Cheneyjin@gmail.com'
-    elif reply==NO:
-        print 'Process terminated! Try other features.'
+
+def Free(toepath1,toepath2):
     return
-
-
