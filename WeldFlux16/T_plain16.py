@@ -414,7 +414,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines("      CALL DISTANCE (p1x,p1y,p1z,p2x,p2y,p2z,p3x,p3y,p3z,\n")
     f.writelines("     &  Am,Bm,Cm,Dm,dmm,An,Bn,Cn,Dn,disn,Aw,Bw,Cw,Dw,dww)\n\n")
         
-    f.writelines("      yy = (Am*coords(1)+Bm*coords(2)+Cmcoords(3)+Dm)**2/dmm\n")
+    f.writelines("      yy = (Am*coords(1)+Bm*coords(2)+Cm*coords(3)+Dm)**2/dmm\n")
         
     f.writelines("          xn = An*coords(1)+Bn*coords(2)+Cn*coords(3)+Dn\n")
     f.writelines("          disx = xn/disn\n")
