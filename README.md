@@ -3,7 +3,9 @@
 ![weldFlux](https://img.shields.io/badge/cheneyjin-weldFlux1.6(trial)-brightgreen)  
 This is a lightweight plug-in for abaqus to generate heat source subroutine DFLUX in welding and Additive Manufacturing modeling.
 
-Watch a video tutorial at https://youtu.be/VQxh8XgLB2o https://www.bilibili.com/video/BV1bZ4y1U7Ho/
+Watch a video tutorial (v1.5) at https://youtu.be/VQxh8XgLB2o https://www.bilibili.com/video/BV1bZ4y1U7Ho/
+v1.6 for free path welding at https://www.bilibili.com/video/BV1Ve4y147ke/
+v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/
 
 ## install
 Put the folder 'WeldFlux16' to abaqus_plugins directory.  
