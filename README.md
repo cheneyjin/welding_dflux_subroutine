@@ -5,6 +5,7 @@ This is a lightweight plug-in for abaqus to generate heat source subroutine DFLU
 
 Watch a video tutorial (v1.5) at https://youtu.be/VQxh8XgLB2o https://www.bilibili.com/video/BV1bZ4y1U7Ho/
 v1.6 for free path welding at https://www.bilibili.com/video/BV1Ve4y147ke/
+
 v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/
 
 ## install
@@ -17,7 +18,7 @@ To run it, launch abaqus CAE, click plug-ins WeldFlux16 in manu bar.
 -  Planar Gauss
 -  Double-ellipsoid
 -  Cone body 
-### Support straight, circular and **free (Pro-version) welding path**.
+### Support straight, circular and **free welding path(Pro-version) **.
 ### The subroutine file uses mm-tonne-s units by default.
 
 
