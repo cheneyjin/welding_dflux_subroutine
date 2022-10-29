@@ -30,7 +30,13 @@ Support straight, circular and **free welding path(Pro-version) **.
 # WeldFlux
 这是一个轻量级的abaqus插件程序，用于快速生成焊接热源子程序DFLUX。
 
-视频教程 https://www.bilibili.com/video/BV1bZ4y1U7Ho/
+插件基础操作 https://www.bilibili.com/video/BV1bZ4y1U7Ho/ 
+
+空间自由路径焊接  https://www.bilibili.com/video/BV1Ve4y147ke/
+
+3D打印直线焊缝  https://www.bilibili.com/video/BV1mT4y1z71p/
+
+3D打印弧形焊缝  https://www.bilibili.com/video/BV13v4y1N7uA/
 
 ## 安装
 将'WeldFlux16'文件夹放于 abaqus_plugins 目录。
@@ -43,5 +49,5 @@ windows系统下一般位于%HOMEPATH%/abaqus_plugins
 -  双椭球
 -  圆锥体
 
-### 支持直线型、圆弧型以及**任意自由焊接路径（仅高级版本）**。
-### 子程序文件默认使用毫米-吨-秒单位制。
+支持直线型、圆弧型以及**任意自由焊接路径（仅高级版本）**。
+子程序文件默认使用毫米-吨-秒单位制。
