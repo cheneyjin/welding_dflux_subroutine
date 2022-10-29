@@ -19,8 +19,8 @@ To run it, launch abaqus CAE, click plug-ins WeldFlux16 in manu bar.
 -  Planar Gauss
 -  Double-ellipsoid
 -  Cone body 
-### Support straight, circular and **free welding path(Pro-version) **.
-### The subroutine file uses mm-tonne-s units by default.
+- Support straight, circular and **free welding path(Pro-version) **.
+**The subroutine file uses mm-tonne-s units by default.**
 
 
 
