@@ -20,7 +20,7 @@ To run it, launch abaqus CAE, click plug-ins WeldFlux16 in manu bar.
 -  Double-ellipsoid
 -  Cone body 
 
-Support straight, circular and **free welding path(Pro-version) **.
+Support straight, circular and **free welding path(Pro-version).**
 
 **The subroutine file uses mm-tonne-s units by default.**
 
@@ -50,4 +50,5 @@ windows系统下一般位于%HOMEPATH%/abaqus_plugins
 -  圆锥体
 
 支持直线型、圆弧型以及**任意自由焊接路径（仅高级版本）**。
+
 子程序文件默认使用毫米-吨-秒单位制。
