@@ -410,8 +410,8 @@ class WeldFlux16DBPickHandler1(AFXProcedure):
         def deactivate(self):
 
             AFXProcedure.deactivate(self)
-            if  self.numberToPick == ONE and (self.keyword1.getValue() or self.keyword2.getValue()) \
-                    and (self.keyword1.getValue()[0]!='<' or self.keyword2.getValue()[0]!='<'):
+            if  self.numberToPick == ONE and self.keyword1.getValue() \
+                    and self.keyword1.getValue()[0]!='<' :
                 sendCommand(self.keyword1.getSetupCommands() + '\nhighlight(%s)' % self.keyword1.getValue() )
 
 class WeldFlux16DBPickHandler2(AFXProcedure):
@@ -450,7 +450,7 @@ class WeldFlux16DBPickHandler2(AFXProcedure):
         def deactivate(self):
 
             AFXProcedure.deactivate(self)
-            if  self.numberToPick == ONE and (self.keyword1.getValue() or self.keyword2.getValue()) \
-                    and (self.keyword1.getValue()[0]!='<' or self.keyword2.getValue()[0]!='<'):
+            if  self.numberToPick == ONE and self.keyword1.getValue() \
+                    and self.keyword1.getValue()[0]!='<' :
                 sendCommand(self.keyword1.getSetupCommands() + '\nhighlight(%s)' % self.keyword1.getValue() )
 
