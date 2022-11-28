@@ -11,7 +11,7 @@ thisDir = os.path.dirname(thisPath)
 # Class definition
 ###########################################################################
 
-class WeldFlux16DB(AFXDataDialog):
+class WeldFlux161DB(AFXDataDialog):
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     def __init__(self, form):
@@ -19,7 +19,7 @@ class WeldFlux16DB(AFXDataDialog):
         # Construct the base class.
         #
 
-        AFXDataDialog.__init__(self, form, 'WeldFlux 1.6',
+        AFXDataDialog.__init__(self, form, 'WeldFlux 1.6.1',
             self.OK|self.APPLY|self.CANCEL, DIALOG_ACTIONS_SEPARATOR)
             
 
@@ -42,16 +42,74 @@ class WeldFlux16DB(AFXDataDialog):
             pt=DEFAULT_SPACING, pb=DEFAULT_SPACING, hs=DEFAULT_SPACING, vs=DEFAULT_SPACING)
         HFrame_1 = FXHorizontalFrame(p=TabItem_1, opts=0, x=0, y=0, w=0, h=0,
             pl=0, pr=0, pt=0, pb=0)
-        GroupBox_1 = FXGroupBox(p=HFrame_1, text='Process Settings', opts=FRAME_GROOVE)
+        VFrame_1 = FXVerticalFrame(p=HFrame_1, opts=0, x=0, y=0, w=0, h=0,
+            pl=0, pr=0, pt=0, pb=0)
+        GroupBox_1 = FXGroupBox(p=VFrame_1, text='Process Settings', opts=FRAME_GROOVE)
         VAligner_1 = AFXVerticalAligner(p=GroupBox_1, opts=0, x=0, y=0, w=0, h=0,
             pl=0, pr=0, pt=0, pb=0)
         AFXTextField(p=VAligner_1, ncols=10, labelText='Current(A):', tgt=form.currentKw, sel=0)
         AFXTextField(p=VAligner_1, ncols=10, labelText='Voltage(V):', tgt=form.volKw, sel=0)
         AFXTextField(p=VAligner_1, ncols=10, labelText='Vel.(mm/s):', tgt=form.velKw, sel=0)
         AFXTextField(p=VAligner_1, ncols=10, labelText='Efficiency:', tgt=form.effKw, sel=0)
-        fileName = os.path.join(thisDir, 'contours.png')
-        icon = afxCreatePNGIcon(fileName)
-        FXLabel(p=HFrame_1, text='', ic=icon)
+        
+        FXCheckButton(p=VFrame_1, text='Enable Pulse/C.M.T.', tgt=form.EnPulseKw, sel=0)
+        GroupBox_11 = FXGroupBox(p=VFrame_1, text='', opts=FRAME_GROOVE)
+        VAligner_11 = AFXVerticalAligner(p=GroupBox_11, opts=0, x=0, y=0, w=0, h=0,
+            pl=0, pr=0, pt=0, pb=0)
+        self.Ibase=AFXTextField(p=VAligner_11, ncols=10, labelText='I_base (A) :', tgt=form.IbaseKw, sel=0)
+        self.Ubase=AFXTextField(p=VAligner_11, ncols=10, labelText='U_base (V):', tgt=form.UbaseKw, sel=0)
+        self.freq=AFXTextField(p=VAligner_11, ncols=10, labelText='Freq.  (Hz):', tgt=form.freqKw, sel=0)
+        self.alpha=AFXTextField(p=VAligner_11, ncols=10, labelText='Alpha       :', tgt=form.alphaKw, sel=0)
+        # add transition Enable
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                True,self.Ibase,\
+                MKUINT(FXWindow.ID_ENABLE, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                True,self.Ubase,\
+                MKUINT(FXWindow.ID_ENABLE, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                True,self.freq,\
+                MKUINT(FXWindow.ID_ENABLE, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                True,self.alpha,\
+                MKUINT(FXWindow.ID_ENABLE, SEL_COMMAND), None)
+        # add transition Disable
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                False,self.Ibase,\
+                MKUINT(FXWindow.ID_DISABLE, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                False,self.Ubase,\
+                MKUINT(FXWindow.ID_DISABLE, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                False,self.freq,\
+                MKUINT(FXWindow.ID_DISABLE, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                False,self.alpha,\
+                MKUINT(FXWindow.ID_DISABLE, SEL_COMMAND), None)
+
+
+        contoursfile = os.path.join(thisDir, 'contours.png')
+        pulsefile = os.path.join(thisDir, 'pulse.png')
+        contoursIC = afxCreatePNGIcon(contoursfile)
+        pulseIC = afxCreatePNGIcon(pulsefile)
+
+        self.contoursPic=FXLabel(p=HFrame_1, text='', ic=contoursIC)
+        self.pulsePic=FXLabel(p=HFrame_1, text='', ic=pulseIC)
+        self.pulsePic.hide()
+
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                True,self.pulsePic,\
+                MKUINT(FXWindow.ID_SHOW, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                True,self.contoursPic,\
+                MKUINT(FXWindow.ID_HIDE, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                False,self.contoursPic,\
+                MKUINT(FXWindow.ID_SHOW, SEL_COMMAND), None)
+        self.addTransition(form.EnPulseKw,AFXTransition.EQ,\
+                False,self.pulsePic,\
+                MKUINT(FXWindow.ID_HIDE, SEL_COMMAND), None)
+
         tabItem = FXTabItem(p=TabBook_1, text='Model Data', ic=None, opts=TAB_TOP_NORMAL,
             x=0, y=0, w=0, h=0, pl=6, pr=6, pt=DEFAULT_PAD, pb=DEFAULT_PAD)
         TabItem_3 = FXVerticalFrame(p=TabBook_1,
@@ -169,7 +227,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         label = FXLabel(p=pickHf, text='Start Point:    ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler1(form, form.point1Kw1, form.point1Kw2,'Pick the start point', NODES|DATUM_POINTS, ONE, label)
+        pickHandler = WeldFlux161DBPickHandler1(form, form.point1Kw1, form.point1Kw2,'Pick the start point', NODES|DATUM_POINTS, ONE, label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -180,7 +238,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.p1Label = FXLabel(p=pickHf, text='Along Point:  ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler1(form, form.point2Kw1,form.point2Kw2, 'Pick a point on weld line', NODES|DATUM_POINTS, ONE,self.p1Label)
+        pickHandler = WeldFlux161DBPickHandler1(form, form.point2Kw1,form.point2Kw2, 'Pick a point on weld line', NODES|DATUM_POINTS, ONE,self.p1Label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.AP1 = FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -191,7 +249,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.p2Label = FXLabel(p=pickHf, text='Along Point2:' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler1(form, form.point3Kw1,form.point3Kw2, 'Pick another point on weld line', NODES|DATUM_POINTS, ONE, self.p2Label)
+        pickHandler = WeldFlux161DBPickHandler1(form, form.point3Kw1,form.point3Kw2, 'Pick another point on weld line', NODES|DATUM_POINTS, ONE, self.p2Label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.AP2=FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -202,7 +260,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.tpLabel = FXLabel(p=pickHf, text='Toe Point:     ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler1(form, form.point4Kw1,form.point4Kw2, 'Pick a point on weld toe', NODES|DATUM_POINTS, ONE,self.tpLabel)
+        pickHandler = WeldFlux161DBPickHandler1(form, form.point4Kw1,form.point4Kw2, 'Pick a point on weld toe', NODES|DATUM_POINTS, ONE,self.tpLabel)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.TP=FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -213,7 +271,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.tpath1Label = FXLabel(p=pickHf, text='Toe Path1:    ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler2(form, form.toepath1Kw,'Pick nodes on weld toe1', NODES, MANY,self.tpath1Label)
+        pickHandler = WeldFlux161DBPickHandler2(form, form.toepath1Kw,'Pick nodes on weld toe1', NODES, MANY,self.tpath1Label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.Tpath1=FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -224,7 +282,7 @@ class WeldFlux16DB(AFXDataDialog):
         #       button is checked in the RSG Dialog Builder dialog.
         pickHf.setSelector(99)
         self.tpath2Label = FXLabel(p=pickHf, text='Toe Path2:    ' + ' (None) ', ic=None, opts=LAYOUT_CENTER_Y|JUSTIFY_LEFT)
-        pickHandler = WeldFlux16DBPickHandler2(form, form.toepath2Kw,'Pick nodes on weld toe2', NODES, MANY,self.tpath2Label)
+        pickHandler = WeldFlux161DBPickHandler2(form, form.toepath2Kw,'Pick nodes on weld toe2', NODES, MANY,self.tpath2Label)
         icon = afxGetIcon('select', AFX_ICON_SMALL )
         self.Tpath2=FXButton(p=pickHf, text='\tPick Items in Viewport', ic=icon, tgt=pickHandler, sel=AFXMode.ID_ACTIVATE,
             opts=BUTTON_NORMAL|LAYOUT_CENTER_Y, x=0, y=0, w=0, h=0, pl=2, pr=2, pt=1, pb=1)
@@ -372,7 +430,7 @@ class WeldFlux16DB(AFXDataDialog):
 # Class definition
 ###########################################################################
 
-class WeldFlux16DBPickHandler1(AFXProcedure):
+class WeldFlux161DBPickHandler1(AFXProcedure):
 
         count = 0
 
@@ -390,8 +448,8 @@ class WeldFlux16DBPickHandler1(AFXProcedure):
 
                 AFXProcedure.__init__(self, form.getOwner())
 
-                WeldFlux16DBPickHandler1.count += 1
-                self.setModeName('WeldFlux16DBPickHandler1%d' % (WeldFlux16DBPickHandler1.count) )
+                WeldFlux161DBPickHandler1.count += 1
+                self.setModeName('WeldFlux161DBPickHandler1%d' % (WeldFlux161DBPickHandler1.count) )
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         def getFirstStep(self):
@@ -410,11 +468,12 @@ class WeldFlux16DBPickHandler1(AFXProcedure):
         def deactivate(self):
 
             AFXProcedure.deactivate(self)
-            if  self.numberToPick == ONE and (self.keyword1.getValue() or self.keyword2.getValue()) \
-                    and (self.keyword1.getValue()[0]!='<' or self.keyword2.getValue()[0]!='<'):
+            if  self.numberToPick == ONE and self.keyword1.getValue() \
+                    and self.keyword1.getValue()[0]!='<' :
                 sendCommand(self.keyword1.getSetupCommands() + '\nhighlight(%s)' % self.keyword1.getValue() )
 
-class WeldFlux16DBPickHandler2(AFXProcedure):
+
+class WeldFlux161DBPickHandler2(AFXProcedure):
 
         count = 0
 
@@ -431,8 +490,8 @@ class WeldFlux16DBPickHandler2(AFXProcedure):
 
                 AFXProcedure.__init__(self, form.getOwner())
 
-                WeldFlux16DBPickHandler2.count += 1
-                self.setModeName('WeldFlux16DBPickHandler2%d' % (WeldFlux16DBPickHandler2.count) )
+                WeldFlux161DBPickHandler2.count += 1
+                self.setModeName('WeldFlux161DBPickHandler2%d' % (WeldFlux161DBPickHandler2.count) )
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         def getFirstStep(self):
@@ -450,7 +509,6 @@ class WeldFlux16DBPickHandler2(AFXProcedure):
         def deactivate(self):
 
             AFXProcedure.deactivate(self)
-            if  self.numberToPick == ONE and (self.keyword1.getValue() or self.keyword2.getValue()) \
-                    and (self.keyword1.getValue()[0]!='<' or self.keyword2.getValue()[0]!='<'):
+            if  self.numberToPick == ONE and self.keyword1.getValue() \
+                    and self.keyword1.getValue()[0]!='<' :
                 sendCommand(self.keyword1.getSetupCommands() + '\nhighlight(%s)' % self.keyword1.getValue() )
-
