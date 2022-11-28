@@ -1,5 +1,5 @@
 #==========================================================================
-#                WeldFlux 1.6.1    Copyright (C) 2022 JIN Cheng                
+#                WeldFlux 1.6.1    Copyright (C) 2022 JIN Cheng              
 # 	                                                                                          
 #                       E-mail: cheneyjin@gmail.com                                   
 #                                                                                                    
@@ -54,7 +54,8 @@ def kernel(current, vol,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,
             print 'Process terminated! Try other features.'
     return
 
-def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,EnPulse,Ibase,Ubase,freq,alpha):
+def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,
+        EnPulse,Ibase,Ubase,freq,alpha):
     t1 = type(point1)
     t2 = type(point2)
     t3 = type(point3)
@@ -221,6 +222,7 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,EnPuls
     
     f.close()
     print "The welding subroutine has been saved in '"+pwd+"\dflux.for' successfully!"
+
     f=open('./Modules.inc', 'w')
     f.writelines("      Module Fouier\n")
     f.writelines("      real::alpha,wpulse,t,ft\n")
@@ -234,7 +236,6 @@ def T_Plain(current,vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,EnPuls
     f.writelines("      END SUBROUTINE GETSERIES\n")
     f.writelines("      END Module Fouier\n")
     f.close()
-
     highlight(point1)
     highlight(point2)
     highlight(point3)
@@ -518,6 +519,7 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
     f.writelines('      disn = sqrt(dnn)\n\n')
     f.writelines('      END subroutine DISTANCE\n')
     f.writelines('      END Module dis\n')
+
     if EnPulse == True:
         f.writelines("      Module Fouier\n")
         f.writelines("      real::alpha,wpulse,t,ft\n")
@@ -530,7 +532,6 @@ def Circle(current, vol,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point3,point4
         f.writelines("        end do\n")
         f.writelines("      END SUBROUTINE GETSERIES\n")
         f.writelines("      END Module Fouier\n")
-
     f.close()
 
     highlight(point1)

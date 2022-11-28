@@ -19,18 +19,18 @@ class WeldFlux161_plugin(AFXForm):
 
         self.cmd = AFXGuiCommand(mode=self, method='kernel',
             objectName='T_plain161', registerQuery=False)
+        self.cmdF = AFXGuiCommand(mode=self, method='Free',
+            objectName='T_plain161', registerQuery=False)
         pickedDefault = ''
         self.currentKw = AFXFloatKeyword(self.cmd, 'current', True,150)
         self.volKw = AFXFloatKeyword(self.cmd, 'vol', True,23)
         self.velKw = AFXFloatKeyword(self.cmd, 'vel', True,5)
         self.effKw = AFXFloatKeyword(self.cmd, 'eff', True,0.9)
-
         self.EnPulseKw = AFXBoolKeyword(self.cmd, 'EnPulse', AFXBoolKeyword.TRUE_FALSE, True, False)
         self.IbaseKw = AFXFloatKeyword(self.cmd, 'Ibase', True,0)
         self.UbaseKw = AFXFloatKeyword(self.cmd, 'Ubase', True,0)
         self.freqKw = AFXFloatKeyword(self.cmd, 'freq', True,20)
         self.alphaKw = AFXFloatKeyword(self.cmd, 'alpha', True,0.5)
-        
         if not self.radioButtonGroups.has_key('mtype'):
             self.mtypeKw1 = AFXIntKeyword(None, 'mtypeDummy', True)
             self.mtypeKw2 = AFXStringKeyword(self.cmd, 'mtype', True)
@@ -72,8 +72,8 @@ class WeldFlux161_plugin(AFXForm):
         self.point2Kw1 = AFXObjectKeyword(self.cmd, 'point2', TRUE, pickedDefault)
         self.point3Kw1 = AFXObjectKeyword(self.cmd, 'point3', TRUE, pickedDefault)
         self.point4Kw1 = AFXObjectKeyword(self.cmd, 'point4', TRUE, pickedDefault)
-        self.toepath1Kw= AFXObjectKeyword(self.cmd, 'toepath1', TRUE, pickedDefault)
-        self.toepath2Kw= AFXObjectKeyword(self.cmd, 'toepath2', TRUE, pickedDefault)
+        self.toepath1Kw= AFXObjectKeyword(self.cmdF, 'toepath1', TRUE, pickedDefault)
+        self.toepath2Kw= AFXObjectKeyword(self.cmdF, 'toepath2', TRUE, pickedDefault)
         self.point1Kw2 = AFXTupleKeyword(self.cmd, 'point1', True,
             3, 3, AFXTUPLE_TYPE_FLOAT)
         self.point2Kw2 = AFXTupleKeyword(self.cmd, 'point2', True,
