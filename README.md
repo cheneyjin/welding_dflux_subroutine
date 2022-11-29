@@ -1,11 +1,13 @@
 ![arc](https://github.com/cheneyjin/welding_dflux_subroutine/blob/main/vs.png)
 # WeldFlux
-![weldFlux](https://img.shields.io/badge/cheneyjin-weldFlux1.6(trial)-brightgreen)  
+![weldFlux](https://img.shields.io/badge/cheneyjin-weldFlux1.6.1-brightgreen)  
 This is a lightweight plug-in for abaqus to generate heat source subroutine DFLUX in welding and Additive Manufacturing modeling.
 
 Watch a video tutorial (v1.5) at https://youtu.be/VQxh8XgLB2o https://www.bilibili.com/video/BV1bZ4y1U7Ho/
 
 v1.6 for free path welding at https://www.bilibili.com/video/BV1Ve4y147ke/
+
+v1.6.1 pulse/CMT welding at https://www.bilibili.com/video/BV1LK411R77m/
 
 v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/
 
