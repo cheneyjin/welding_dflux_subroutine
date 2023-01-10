@@ -1,0 +1,49 @@
+
+
+<HTML>
+<BODY>
+<style type="text/css">
+body { font-family: "Courier New", Courier, mono; 
+       font-size: 14px; }
+</style>
+=================================================================<br>
+<h3>Units Converter plug-in</h3>
+    original written by:   James Lockley, ABAQUS UK, Jan 2005<br>
+ modified by:   Cheng JIN, China, Jan 2023<br>
+=================================================================<br>
+<br>
+This plugin provides a simple units converter from one units system to another.<br>
+All conversions are contained within the file units.py as a series of <br>
+nested python dictionaries.<br>
+<br>
+Each property is added to the dictionary in the following way:<br>
+The keys of the top level dictionary are the physical property;<br>
+the keys of the second level are the units of the input variable<br>
+and the keys of the third level are possible output units.<br>
+    <br>
+The conversion is performed by replacing 'x' with the input amount and <br>
+evaluating the resulting expression.<br>
+<br>
+eg:<br>
+properties['Time']&nbsp;=&nbsp;{'sec'&nbsp;:&nbsp;{'min'&nbsp;:&nbsp;'x/60.'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'hour':&nbsp;'x/3600.},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'min':&nbsp;&nbsp;{'sec'&nbsp;:&nbsp;'x*60.',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'hour':&nbsp;'x/60.'&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'hour':&nbsp;{'sec'&nbsp;:&nbsp;'x/3600.',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'min&nbsp;&nbsp;:&nbsp;x/60.}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}			       <br>
+    <br>
+to convert 2.5 hrs to seconds: the following is performed:<br>
+>>> eqn = properties['Time']['hour']['sec']<br>
+>>> eval(eqn.replace('x', '%s')%2.5)<br>
+<br>
+<br>
+Any unwanted conversions can simply be commneted out (as is 'Currency'<br>
+in the supplied units.py.<br>
+<br>
+The units.py can be modified and reloaded using the reload button, without <br>
+having to restart /CAE.<br>
+<br>
+Properties are listed in the pulldown menu in alphabetical order.
+</BODY></HTML>
+
