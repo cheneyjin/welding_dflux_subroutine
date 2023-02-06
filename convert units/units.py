@@ -58,12 +58,12 @@ properties['Latent Heat'] = {'J/kg' : {'mJ/ton' : 'x*1e6'},
                       'mJ/ton': {'J/kg'  : 'x*1e-6'}
                       }
 
-properties['Film Coefficient'] = {'J/(m^2*K^4)' : {'mJ/(mm^2*K^4)' : 'x*1e-3'},
-                      'mJ/(mm^2*K^4)': {'J/(m^2*K^4)'  : 'x*1e3'}
+properties['Film Coefficient'] = {'W/(m^2*K)' : {'mW/(mm^2*K)' : 'x*1e-3'},
+                      'mW/(mm^2*K)': {'W/(m^2*K)'  : 'x*1e3'}
                       }
 
-properties['Stefan Boltzmann'] = {'W/(m^2*K*s)' : {'mW/(mm^2*K*s)' : 'x*1e-3'},
-                      'mJ/(mm^2*K*s)': {'J/(m^2*K*s)'  : 'x*1e3'}
+properties['Stefan Boltzmann'] = {'W/(m^2*K^4)' : {'mW/(mm^2*K^4)' : 'x*1e-3'},
+                      'mW/(mm^2*K^4)': {'W/(m^2*K^4)'  : 'x*1e3'}
                       }
 
 properties['E/Stress'] = {'Pa' : {'MPa' : 'x*1e-6'},
