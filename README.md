@@ -9,6 +9,8 @@ v1.6 for free path welding at https://www.bilibili.com/video/BV1Ve4y147ke/
 
 v1.6.1 pulse/CMT welding at https://www.bilibili.com/video/BV1LK411R77m/
 
+v1.7.0 swing welding at https://www.bilibili.com/video/BV11A411C7mw/
+
 v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/
 
 Text version instruction (in Chinese) at https://www.bilibili.com/read/cv19366708
@@ -43,6 +45,8 @@ Support straight, circular and **free welding path(Pro-version).**
 3D打印弧形焊缝 (v2.0-dev) https://www.bilibili.com/video/BV13v4y1N7uA/
 
 脉冲焊及CMT焊接 (v1.6.1) https://www.bilibili.com/video/BV1LK411R77m/
+
+摆动焊接 (v1.7.0) https://www.bilibili.com/video/BV11A411C7mw/
 
 文字版使用说明  https://www.bilibili.com/read/cv19366708
 
