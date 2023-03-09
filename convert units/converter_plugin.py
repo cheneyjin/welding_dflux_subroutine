@@ -1,7 +1,6 @@
 """
 =================================================================
  original written by:   James Lockley, ABAQUS UK, Jan 2005
- modified by:   Cheng JIN, China, Jan 2023
 
  converts units from one measurement unit to another according to the formula
  described in units.py
