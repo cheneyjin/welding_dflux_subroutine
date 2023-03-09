@@ -21,12 +21,6 @@ import math
 #
 #                                 Version 1.6.1
 #
-#                                 developed by
-#
-#
-#                                  JIN CHENG
-#                          DALIAN JIAOTONG UNIVERSITY
-#
 #===========================================================================
 #	Notes:
 #
