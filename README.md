@@ -1,6 +1,6 @@
 ![arc](https://github.com/cheneyjin/welding_dflux_subroutine/blob/main/vs.png)
 # Abaqus WeldToolkit Overview
-It is a is a collection of abaqus plug-ins for facilitating welding and Additive Manufacturing modeling.
+It is a collection of abaqus plug-ins for facilitating welding and Additive Manufacturing modeling.
 - **WeldFlux:** to generate heat source subroutine DFLUX in welding and Additive Manufacturing modeling.
 - **WeldGeom:** to build weld geometry especially multipass weld geometry.
 - **AutoRot:** to rotate model automaticly in CAE.
