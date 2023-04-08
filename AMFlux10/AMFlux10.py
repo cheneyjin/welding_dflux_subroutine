@@ -30,6 +30,33 @@ import re
 #===========================================================================
 def kernel(power,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,point4,\
         PreStepName,FirstAMstep,CurrentPass,Length,Space,Layers,Eltype,BEle,Eles):
+    # Check inputs
+    vps = session.viewports[session.currentViewportName]
+    Model_name = vps.displayedObject.modelName
+    sets=mdb.models[Model_name].rootAssembly.sets
+    if sets.has_key(CurrentPass)==0:
+        reply=getWarningReply(' Make sure Set \''+CurrentPass+'\' is exist!', (YES, NO))
+        if reply==YES:
+            print 'The set should be in Assembly level. Case sensitive.'
+            print 'Precess terminated!'
+            return 0
+        elif reply==NO:
+            print 'Process terminated!'
+            return 0
+    if Eltype == 'Box':
+        waste=ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,\
+                    Length,Layers)
+    elif Eltype == 'Label':
+        reply=getWarningReply('   Only Box type can be selected in \n\
+    opensource version. Contact us for full features. \n\
+    E-mail: Cheneyjin@gmail.com', (YES, NO))
+        if reply==YES:
+            print 'Contact us for full features!'
+            print 'Email: Cheneyjin@gmail.com'
+            return
+        elif reply==NO:
+            print 'Process terminated! Try other features.'
+            return
 
     if wtype == 'Line':
         T_Plain(power,vel,eff,mtype,a,b,c,a2,ratio,point1,point2,point4,waste)
@@ -46,24 +73,10 @@ def kernel(power,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,point4,
             print 'Process terminated! Try other features.'
             return 
 
-    if Eltype == 'Box':
-        waste=ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,\
-                    Length,Layers)
-    elif Eltype == 'Label':
-        reply=getWarningReply('   Only Box type can be selected in \n\
-    opensource version. Contact us for full features. \n\
-    E-mail: Cheneyjin@gmail.com', (YES, NO))
-        if reply==YES:
-            print 'Contact us for full features!'
-            print 'Email: Cheneyjin@gmail.com'
-            return
-        elif reply==NO:
-            print 'Process terminated! Try other features.'
-            return
-
     return
 
 def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Layers):
+
     Tol=0.001
     Nsegment=int(Length//(Space*Layers))
     left = Length%(Space*Layers)
@@ -87,8 +100,7 @@ def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Laye
         ini_left=0.2*period_left
 
     ## Add AM Steps
-    vps = session.viewports[session.currentViewportName]
-    Model_name = vps.displayedObject.modelName
+    
     for i in range (Nsegment):
         if i==0:
             mdb.models[Model_name].HeatTransferStep(timePeriod=period,deltmx=1500,\
