@@ -76,7 +76,8 @@ def kernel(power,vel,eff,mtype,a,b,c,a2,ratio,wtype,point1,point2,point3,point4,
     return
 
 def ADDL(vel,point1,point2,PreStepName,FirstAMstep,CurrentPass,Space,Length,Layers):
-
+    vps = session.viewports[session.currentViewportName]
+    Model_name = vps.displayedObject.modelName
     Tol=0.001
     Nsegment=int(Length//(Space*Layers))
     left = Length%(Space*Layers)
