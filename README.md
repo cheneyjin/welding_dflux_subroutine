@@ -1,7 +1,8 @@
 ![arc](https://github.com/cheneyjin/welding_dflux_subroutine/blob/main/vs.png)
 # Abaqus WeldToolkit Overview
 It is a collection of abaqus plug-ins for facilitating welding and Additive Manufacturing modeling.
-- **WeldFlux:** to generate heat source subroutine DFLUX in welding and Additive Manufacturing modeling.
+- **WeldFlux:** to generate heat source subroutine DFLUX in welding modeling.
+- **AMFlux:** Additive Manufacturing modeling.
 - **WeldGeom:** to build weld geometry especially multipass weld geometry.
 - **AutoRot:** to rotate model automaticly in CAE.
 - **ThermoToMech:** to transform a thermal analysis job(.inp) to a mechnical one in sequential thermomechanical calculation.
@@ -19,7 +20,8 @@ v1.6.1 pulse/CMT welding at https://www.bilibili.com/video/BV1LK411R77m/
 
 v1.7.0 swing welding at https://www.bilibili.com/video/BV11A411C7mw/
 
-v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/
+v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/    
+now it is named AMFlux.
 
 Text version instruction (in Chinese) at https://www.bilibili.com/read/cv19366708
 
@@ -43,6 +45,7 @@ Support straight, circular and **free welding path(Pro-version).**
 # Abaqus焊接工具箱简介
 这是一系列abaqus插件合集，用来为焊接及增材制造模拟提供方便。
 - WeldFlux: 在焊接及增材制造模拟中生成热源子程序DFLUX。
+- AMFlux: 增材制造模拟。
 - WeldGeom: 建立焊缝几何，尤其是多道焊几何模型。
 - AutoRot: 在CAE中自动旋转模型。
 - ThermoToMech: 在顺序热力耦合计算中，将热场计算文件（inp）转换为后续的力场计算文件。
@@ -57,7 +60,8 @@ Support straight, circular and **free welding path(Pro-version).**
 
 3D打印直线焊缝  (v2.0-dev) https://www.bilibili.com/video/BV1mT4y1z71p/
 
-3D打印弧形焊缝 (v2.0-dev) https://www.bilibili.com/video/BV13v4y1N7uA/
+3D打印弧形焊缝 (v2.0-dev) https://www.bilibili.com/video/BV13v4y1N7uA/    
+现命名为AMFlux
 
 脉冲焊及CMT焊接 (v1.6.1) https://www.bilibili.com/video/BV1LK411R77m/
 
