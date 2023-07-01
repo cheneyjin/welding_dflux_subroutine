@@ -28,7 +28,7 @@ properties['Temperature']={'F': {'C': '5./9.*(x-32)',
                                  }
                            }
 
-properties['Mass'] = {'g':  {'kg' :  'x/1000.',
+properties['Mass'] = {'g':  {'kg' :  'x*0.001',
                              'ton':  'x/1e6',
                              'lb' :  'x*0.00220462262'
                              },
