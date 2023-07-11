@@ -8,7 +8,7 @@ It is a collection of abaqus plug-ins for facilitating welding and Additive Manu
 - **ThermoToMech:** to transform a thermal analysis job(.inp) to a mechnical one in sequential thermomechanical calculation.
 - **Convert units:** to convert units used in thermomechanical calculation.
 
-# WeldFlux
+# WeldFlux Changelog
 ![weldFlux](https://img.shields.io/badge/cheneyjin-weldFlux1.6.1-brightgreen)  
 This is a lightweight plug-in for abaqus to generate heat source subroutine DFLUX in welding and Additive Manufacturing modeling.
 
@@ -20,10 +20,15 @@ v1.6.1 pulse/CMT welding at https://www.bilibili.com/video/BV1LK411R77m/
 
 v1.7.0 swing welding at https://www.bilibili.com/video/BV11A411C7mw/
 
-v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/    
-now it is named AMFlux.
+v1.7.1 support for multi-pass welding at https://www.bilibili.com/video/BV1hT411n7WU/
 
-Text version instruction (in Chinese) at https://www.bilibili.com/read/cv19366708
+v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/    
+now it is named AMFlux1.0 (avtivate element by Model Change). 
+Ask author for a new 3D print plugin EventGenerator1.1 (activate element by Event Series) at https://www.bilibili.com/video/BV1sV4y1y7Pt/
+
+# WeldGeom
+This plugin is used to create weld geometry especially multipass weld geometry in abaqus.
+Watch videos tutorial (v1.0) at https://www.bilibili.com/video/BV1M84y1g7Jd/
 
 ## install
 Put the folder 'WeldFlux161' to abaqus_plugins directory.  
@@ -40,8 +45,6 @@ Support straight, circular and **free welding path(Pro-version).**
 
 **The subroutine file uses mm-tonne-s units by default.**
 
-
-
 # Abaqus焊接工具箱简介
 这是一系列abaqus插件合集，用来为焊接及增材制造模拟提供方便。
 - WeldFlux: 在焊接及增材制造模拟中生成热源子程序DFLUX。
@@ -51,7 +54,7 @@ Support straight, circular and **free welding path(Pro-version).**
 - ThermoToMech: 在顺序热力耦合计算中，将热场计算文件（inp）转换为后续的力场计算文件。
 - Convert units: 用于大多数热力计算中的单位转换。
 
-# WeldFlux
+# WeldFlux更新历史
 这是一个轻量级的abaqus插件程序，用于快速生成焊接热源子程序DFLUX。
 
 插件基础操作 (v1.5) https://www.bilibili.com/video/BV1bZ4y1U7Ho/ 
@@ -67,7 +70,8 @@ Support straight, circular and **free welding path(Pro-version).**
 
 摆动焊接 (v1.7.0) https://www.bilibili.com/video/BV11A411C7mw/
 
-文字版使用说明  https://www.bilibili.com/read/cv19366708
+支持多道焊（v1.7.1）https://www.bilibili.com/video/BV1hT411n7WU/
+
 
 ## 安装
 将'WeldFlux161'文件夹放于 abaqus_plugins 目录。
