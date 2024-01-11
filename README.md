@@ -22,6 +22,10 @@ v1.7.0 swing welding at https://www.bilibili.com/video/BV11A411C7mw/
 
 v1.7.1 support for multi-pass welding at https://www.bilibili.com/video/BV1hT411n7WU/
 
+v1.7.2 a private version for AM simulation
+
+v1.7.3 support for multi sources and hybrid welding at https://www.bilibili.com/video/BV1uK411v7AX/
+
 v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https://www.bilibili.com/video/BV13v4y1N7uA/    
 now it is named AMFlux1.0 (avtivate element by Model Change). 
 Ask author for a new 3D print plugin EventGenerator1.1 (activate element by Event Series) at https://www.bilibili.com/video/BV1sV4y1y7Pt/
@@ -71,6 +75,10 @@ Support straight, circular and **free welding path(Pro-version).**
 摆动焊接 (v1.7.0) https://www.bilibili.com/video/BV11A411C7mw/
 
 支持多道焊（v1.7.1）https://www.bilibili.com/video/BV1hT411n7WU/
+
+支持增材制造中热源自动接续(v1.7.2)  这是一个私人版本
+
+支持多热源和复合热源(v1.7.3) https://www.bilibili.com/video/BV1uK411v7AX/
 
 
 ## 安装
