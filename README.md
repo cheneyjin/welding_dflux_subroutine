@@ -30,6 +30,12 @@ v2.0-dve for 3D print at https://www.bilibili.com/video/BV1mT4y1z71p/    https:/
 now it is named AMFlux1.0 (avtivate element by Model Change). 
 Ask author for a new 3D print plugin EventGenerator1.1 (activate element by Event Series) at https://www.bilibili.com/video/BV1sV4y1y7Pt/
 
+v1.8.0 support for FSW sources at https://www.bilibili.com/video/BV1dUW3eGEFD
+
+v1.8.1 support for segmented sources at https://www.bilibili.com/video/BV16m2tYqET6/
+
+v1.8.2 support for CW/CCW swing welding.
+
 # WeldGeom
 This plugin is used to create weld geometry especially multipass weld geometry in abaqus.
 Watch videos tutorial (v1.0) at https://www.bilibili.com/video/BV1M84y1g7Jd/
@@ -79,6 +85,12 @@ Support straight, circular and **free welding path(Pro-version).**
 支持增材制造中热源自动接续(v1.7.2)  这是一个私人版本
 
 支持多热源和复合热源(v1.7.3) https://www.bilibili.com/video/BV1uK411v7AX/
+
+支持搅拌摩擦焊热源(v1.8.0) https://www.bilibili.com/video/BV1dUW3eGEFD
+
+支持分段热源(v1.8.1) https://www.bilibili.com/video/BV16m2tYqET6/
+
+支持螺旋摆动热源(v1.8.2).
 
 
 ## 安装
